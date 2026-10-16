@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>External Website - Testing FormCraft Embed Widget</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero {
+      max-width: 900px;
+      margin: 80px auto;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    p {
+      font-size: 19px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+    .info-card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: left;
+      margin-top: 48px;
+    }
+    .info-card h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #e2e8f0;
+    }
+    .code-block {
+      background: #020617;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: monospace;
+      color: #38bdf8;
+      font-size: 14px;
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+    .callout {
+      margin-top: 24px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">⚡ Acme Corporation (Test Host Site)</div>
+    <div style="font-size: 14px; color: #94a3b8;">Third-Party Integration Demo</div>
+  </header>
+
+  <main class="hero">
+    <div class="badge">External Website Embed Demo</div>
+    <h1>See FormCraft Running On Any External Web Page</h1>
+    <p>This static mock client website demonstrates how the FormCraft chatbot widget seamlessly embeds and floats on any customer website with a single script tag.</p>
+
+    <div class="callout">
+      <span>👉 Look at the bottom-right corner of your screen! Click the floating button to open the conversational form chatbot.</span>
+    </div>
+
+    <div class="info-card">
+      <h3>Embedded Script Tag in &lt;head&gt; / &lt;body&gt;:</h3>
+      <div class="code-block" id="scriptSnippet">
+        &lt;script src="/embed.js" data-form-id="AUTO_DETECT" defer&gt;&lt;/script&gt;
+      </div>
+      <p style="font-size: 14px; color: #64748b; margin-top: 12px; margin-bottom: 0;">
+        Parameters like <code>data-color</code> and <code>data-position</code> can also be customized directly in the script tag.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    // Dynamically retrieve the first form ID from local API to ensure this test page works seamlessly!
+    fetch('/api/forms')
+      .then(res => res.json())
+      .then(forms => {
+        if (forms && forms.length > 0) {
+          const form = forms[0];
+          document.getElementById('scriptSnippet').innerText = 
+            `<script src="${window.location.origin}/embed.js" data-form-id="${form.id}" defer><\\/script>`;
+          
+          // Inject embed script for the sample form
+          const script = document.createElement('script');
+          script.src = '/embed.js';
+          script.setAttribute('data-form-id', form.id);
+          script.setAttribute('data-color', form.themeColor || '#4f46e5');
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+      })
+      .catch(err => console.error("Could not load forms for test page:", err));
+  </script>
+</body>
+</html>

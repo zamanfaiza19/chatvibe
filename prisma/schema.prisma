@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Form {
+  id                String       @id @default(cuid())
+  title             String
+  description       String?
+  published         Boolean      @default(true)
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+  
+  // Customization settings for the Chatbot Widget
+  botName           String       @default("FormBot")
+  botAvatar         String       @default("🤖")
+  themeColor        String       @default("#4f46e5")
+  welcomeMessage    String       @default("Hi there! 👋 Thanks for stopping by. Could you answer a few quick questions for us?")
+  completionMessage String       @default("All done! 🎉 Thank you so much for your responses. Have a wonderful day!")
+
+  questions         Question[]
+  submissions       Submission[]
+}
+
+model Question {
+  id          String   @id @default(cuid())
+  formId      String
+  form        Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  order       Int
+  type        String   // "text", "email", "multiple_choice", "yes_no"
+  title       String
+  description String?
+  placeholder String?
+  required    Boolean  @default(true)
+  options     String?  // JSON string array for choices: e.g. ["Product Support", "Sales Inquiry", "General Question"]
+
+  answers     Answer[]
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  formId    String
+  form      Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  
+  answers   Answer[]
+}
+
+model Answer {
+  id           String     @id @default(cuid())
+  submissionId String
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  questionId   String
+  question     Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  value        String
+}
