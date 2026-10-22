@@ -39,6 +39,7 @@ export default function ChatbotWidget({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const msgCounterRef = useRef<number>(1);
+  const answersRef = useRef<Record<string, string>>({});
 
   const questions = React.useMemo(() => form.questions || [], [form.questions]);
   const currentQuestion: QuestionData | undefined = questions[currentQuestionIndex];
@@ -64,89 +65,85 @@ export default function ChatbotWidget({
     }
   }, [currentQuestionIndex, isTyping, currentQuestion]);
 
-  const handleAllQuestionsAnswered = React.useCallback(
-    async (finalAnswers?: Record<string, string>) => {
-      setIsTyping(true);
-      setCurrentQuestionIndex(-1);
+  const handleAllQuestionsAnswered = async (finalAnswers?: Record<string, string>) => {
+    setIsTyping(true);
+    setCurrentQuestionIndex(-1);
 
-      const answersToSubmit = finalAnswers || answers;
+    const answersToSubmit = finalAnswers || answersRef.current;
 
+    try {
+      setIsSubmitting(true);
+      if (!isPreview) {
+        await fetch(`/api/forms/${form.id}/submissions`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ answers: answersToSubmit, isPreview }),
+        });
+      }
+    } catch (err) {
+      console.error("Submission failed:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
+
+    setTimeout(() => {
+      setIsTyping(false);
+      setIsCompleted(true);
+
+      const completionMsg: ChatMessage = {
+        id: `completion-${msgCounterRef.current++}`,
+        sender: "bot",
+        text: form.completionMessage || "Thank you! 🎉 Your responses have been submitted successfully.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, completionMsg]);
+
+      // Trigger celebratory confetti effect
       try {
-        setIsSubmitting(true);
-        if (!isPreview) {
-          await fetch(`/api/forms/${form.id}/submissions`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ answers: answersToSubmit, isPreview }),
-          });
-        }
-      } catch (err) {
-        console.error("Submission failed:", err);
-      } finally {
-        setIsSubmitting(false);
+        confetti({
+          particleCount: 80,
+          spread: 60,
+          origin: { y: 0.7 },
+        });
+      } catch {
+        // Fallback gracefully if canvas is unavailable
       }
+    }, 700);
+  };
 
-      setTimeout(() => {
-        setIsTyping(false);
-        setIsCompleted(true);
+  const askQuestion = (index: number) => {
+    if (index >= questions.length) {
+      handleAllQuestionsAnswered();
+      return;
+    }
 
-        const completionMsg: ChatMessage = {
-          id: `completion-${msgCounterRef.current++}`,
+    const q = questions[index];
+    setCurrentQuestionIndex(index);
+    setIsTyping(true);
+
+    setTimeout(() => {
+      setIsTyping(false);
+      const questionText = q.description ? `${q.title}\n${q.description}` : q.title;
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `bot-q-${q.id || index}-${msgCounterRef.current++}`,
           sender: "bot",
-          text: form.completionMessage || "Thank you! 🎉 Your responses have been submitted successfully.",
+          text: questionText,
+          questionIndex: index,
           timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, completionMsg]);
+        },
+      ]);
+    }, 600);
+  };
 
-        // Trigger celebratory confetti effect
-        try {
-          confetti({
-            particleCount: 80,
-            spread: 60,
-            origin: { y: 0.7 },
-          });
-        } catch {
-          // Fallback gracefully if canvas is unavailable
-        }
-      }, 700);
-    },
-    [answers, form.completionMessage, form.id, isPreview]
-  );
-
-  const askQuestion = React.useCallback(
-    (index: number) => {
-      if (index >= questions.length) {
-        handleAllQuestionsAnswered();
-        return;
-      }
-
-      const q = questions[index];
-      setCurrentQuestionIndex(index);
-      setIsTyping(true);
-
-      setTimeout(() => {
-        setIsTyping(false);
-        const questionText = q.description ? `${q.title}\n${q.description}` : q.title;
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `bot-q-${q.id || index}-${msgCounterRef.current++}`,
-            sender: "bot",
-            text: questionText,
-            questionIndex: index,
-            timestamp: new Date(),
-          },
-        ]);
-      }, 600);
-    },
-    [handleAllQuestionsAnswered, questions]
-  );
-
-  const resetChat = React.useCallback(() => {
+  const resetChat = () => {
+    answersRef.current = {};
     setAnswers({});
     setIsCompleted(false);
     setErrorMessage(null);
     setInputValue("");
+    setCurrentQuestionIndex(-1);
 
     const welcomeMsg: ChatMessage = {
       id: `welcome-${msgCounterRef.current++}`,
@@ -166,13 +163,14 @@ export default function ChatbotWidget({
     }, 700);
 
     return () => clearTimeout(timer);
-  }, [askQuestion, form.welcomeMessage, questions.length]);
+  };
 
-  // Initialize conversation with Welcome Message
+  // Initialize conversation only on mount or when switching forms
   useEffect(() => {
     const cleanup = resetChat();
     return cleanup;
-  }, [resetChat]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.id]);
 
   const handleUserAnswer = async (answerValue: string) => {
     if (!currentQuestion) return;
@@ -196,6 +194,7 @@ export default function ChatbotWidget({
     // Record answer
     const questionId = currentQuestion.id || `q-${currentQuestionIndex}`;
     const newAnswers = { ...answers, [questionId]: trimmed };
+    answersRef.current = newAnswers;
     setAnswers(newAnswers);
 
     // Add user bubble
