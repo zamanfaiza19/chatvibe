@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FormData, QuestionData, QuestionType } from "@/types";
 import ChatbotWidget from "@/components/ChatbotWidget";
 import {
@@ -10,10 +10,8 @@ import {
   ArrowDown,
   Save,
   CheckCircle2,
-  Sparkles,
   Layers,
   Settings,
-  Eye,
   Type,
   Mail,
   ListOrdered,
@@ -23,7 +21,6 @@ import {
   Bot,
   Palette,
   AlertCircle,
-  HelpCircle,
 } from "lucide-react";
 import Link from "next/link";
 import EmbedModal from "@/components/EmbedModal";
@@ -53,11 +50,12 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [showEmbedModal, setShowEmbedModal] = useState(false);
+  const newQIdRef = useRef<number>(1);
 
   // Add Question
   const addQuestion = (type: QuestionType = "text") => {
     const newQ: QuestionData = {
-      id: `temp-${Date.now()}`,
+      id: `temp-${newQIdRef.current++}`,
       order: questions.length,
       type,
       title:
@@ -102,7 +100,11 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
   };
 
   // Update specific question field
-  const updateQuestion = (index: number, field: keyof QuestionData, value: any) => {
+  const updateQuestion = <K extends keyof QuestionData>(
+    index: number,
+    field: K,
+    value: QuestionData[K]
+  ) => {
     const updated = [...questions];
     updated[index] = { ...updated[index], [field]: value };
     setQuestions(updated);
@@ -167,8 +169,9 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 2500);
       refreshPreview();
-    } catch (err: any) {
-      setSaveError(err.message || "An error occurred while saving.");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "An error occurred while saving.";
+      setSaveError(msg);
     } finally {
       setIsSaving(false);
     }
@@ -496,7 +499,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                     <span>General Form Information</span>
                   </h3>
                   <p className="text-xs text-slate-500 mb-4">
-                    Basic details that appear on the form's header and dashboard.
+                    Basic details that appear on the form&apos;s header and dashboard.
                   </p>
                   <div className="space-y-4">
                     <div>
@@ -531,7 +534,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                     <span>Chatbot Persona & Theme</span>
                   </h3>
                   <p className="text-xs text-slate-500 mb-4">
-                    Customize your chatbot's avatar, bot name, and branding color.
+                    Customize your chatbot&apos;s avatar, bot name, and branding color.
                   </p>
 
                   <div className="space-y-4">
@@ -683,7 +686,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
             </div>
 
             <p className="text-[11px] text-center text-slate-400 mt-2">
-              💡 Test questions in real-time. Submissions in preview mode won't pollute production data.
+              💡 Test questions in real-time. Submissions in preview mode won&apos;t pollute production data.
             </p>
           </div>
         </div>

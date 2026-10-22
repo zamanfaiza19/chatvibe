@@ -80,7 +80,7 @@ async function main() {
   const qIdea = questions1.find((q) => q.order === 4);
 
   if (qName && qEmail && qSource && qRec && qIdea) {
-    const sub1 = await prisma.submission.create({
+    await prisma.submission.create({
       data: {
         formId: form1.id,
         createdAt: new Date(Date.now() - 1000 * 60 * 60 * 4), // 4 hours ago
@@ -96,7 +96,7 @@ async function main() {
       },
     });
 
-    const sub2 = await prisma.submission.create({
+    await prisma.submission.create({
       data: {
         formId: form1.id,
         createdAt: new Date(Date.now() - 1000 * 60 * 60 * 18), // 18 hours ago
@@ -112,7 +112,7 @@ async function main() {
       },
     });
 
-    const sub3 = await prisma.submission.create({
+    await prisma.submission.create({
       data: {
         formId: form1.id,
         createdAt: new Date(Date.now() - 1000 * 60 * 60 * 36), // 36 hours ago

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FormData } from "@/types";
-import { Copy, Check, Code, ExternalLink, Globe, X, Eye } from "lucide-react";
+import { Copy, Check, Code, ExternalLink, Globe, X } from "lucide-react";
 
 interface EmbedModalProps {
   form: FormData;
@@ -55,7 +55,7 @@ export default function EmbedModal({ form, isOpen, onClose }: EmbedModalProps) {
             </div>
             <div>
               <h3 className="font-bold text-slate-800 text-base">Embed & Share Form</h3>
-              <p className="text-xs text-slate-500">"{form.title}"</p>
+              <p className="text-xs text-slate-500">&ldquo;{form.title}&rdquo;</p>
             </div>
           </div>
           <button

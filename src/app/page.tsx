@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatbotWidget from "@/components/ChatbotWidget";
-import { FormData } from "@/types";
+import { FormData, QuestionType } from "@/types";
 import Link from "next/link";
 import {
   Sparkles,
@@ -10,12 +10,9 @@ import {
   ArrowRight,
   CheckCircle2,
   Code,
-  Layers,
   BarChart3,
-  MessageSquare,
   Globe,
   Sliders,
-  ShieldCheck,
   Zap,
   ExternalLink,
 } from "lucide-react";
@@ -37,7 +34,7 @@ export default async function LandingPage() {
         ...sampleFormRecord,
         questions: sampleFormRecord.questions.map((q) => ({
           ...q,
-          type: q.type as any,
+          type: q.type as QuestionType,
           options: q.options ? JSON.parse(q.options) : [],
         })),
       }
@@ -351,7 +348,7 @@ export default async function LandingPage() {
               </div>
               <h4 className="text-lg font-bold text-slate-900 mb-2">Customize & Preview</h4>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Pick your bot's name, avatar emoji, welcome greeting, and brand color. Test the live interactive preview right in your browser.
+                Pick your bot&apos;s name, avatar emoji, welcome greeting, and brand color. Test the live interactive preview right in your browser.
               </p>
             </div>
 

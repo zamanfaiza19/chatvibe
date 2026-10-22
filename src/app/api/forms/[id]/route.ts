@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { QuestionData } from "@/types";
 
 export async function GET(
   request: Request,
@@ -60,7 +61,7 @@ export async function PUT(
     } = body;
 
     // Use transaction to update form details and sync questions
-    const updatedForm = await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async (tx) => {
       // 1. Update basic form data
       const form = await tx.form.update({
         where: { id },
@@ -80,7 +81,7 @@ export async function PUT(
       if (Array.isArray(questions)) {
         // Delete questions that are no longer present
         const incomingIds = questions
-          .map((q: any) => q.id)
+          .map((q: QuestionData) => q.id)
           .filter(Boolean) as string[];
 
         await tx.question.deleteMany({

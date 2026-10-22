@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import FormBuilder from "@/components/FormBuilder";
 import Navbar from "@/components/Navbar";
 import { notFound } from "next/navigation";
-import { FormData } from "@/types";
+import { FormData, QuestionType } from "@/types";
 
 export default async function EditFormPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -27,7 +27,7 @@ export default async function EditFormPage(props: { params: Promise<{ id: string
     ...form,
     questions: form.questions.map((q) => ({
       ...q,
-      type: q.type as any,
+      type: q.type as QuestionType,
       options: q.options ? JSON.parse(q.options) : [],
     })),
   };

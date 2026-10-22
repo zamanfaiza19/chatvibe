@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import ChatbotWidget from "@/components/ChatbotWidget";
 import { notFound } from "next/navigation";
-import { FormData } from "@/types";
+import { FormData, QuestionType } from "@/types";
 import Link from "next/link";
 import { Bot, AlertCircle } from "lucide-react";
 
@@ -25,7 +25,7 @@ export default async function PublicFormPage(props: { params: Promise<{ id: stri
     ...form,
     questions: form.questions.map((q) => ({
       ...q,
-      type: q.type as any,
+      type: q.type as QuestionType,
       options: q.options ? JSON.parse(q.options) : [],
     })),
   };

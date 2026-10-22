@@ -8,19 +8,14 @@ import EmbedModal from "@/components/EmbedModal";
 import { FormData, SubmissionData } from "@/types";
 import { formatDate, timeAgo } from "@/lib/utils";
 import {
-  ArrowLeft,
   Download,
   Share2,
   Trash2,
-  Layers,
-  Calendar,
   MessageSquare,
   ExternalLink,
-  CheckCircle2,
   BarChart2,
   List,
   Search,
-  Bot,
   RefreshCw,
 } from "lucide-react";
 
@@ -33,11 +28,7 @@ export default function SubmissionsPage(props: { params: Promise<{ id: string }>
   const [showEmbedModal, setShowEmbedModal] = useState(false);
   const [activeView, setActiveView] = useState<"table" | "analytics">("table");
 
-  useEffect(() => {
-    loadData();
-  }, [id]);
-
-  const loadData = async () => {
+  const loadData = React.useCallback(async () => {
     try {
       setLoading(true);
       const [formRes, subRes] = await Promise.all([
@@ -58,7 +49,11 @@ export default function SubmissionsPage(props: { params: Promise<{ id: string }>
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleDeleteSubmission = async (subId: string) => {
     if (!confirm("Are you sure you want to delete this response?")) return;
@@ -459,7 +454,7 @@ export default function SubmissionsPage(props: { params: Promise<{ id: string }>
                             key={i}
                             className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-800"
                           >
-                            "{ans}"
+                            &ldquo;{ans}&rdquo;
                           </div>
                         ))
                       )}

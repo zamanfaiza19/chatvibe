@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormData } from "@/types";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -10,24 +11,18 @@ import {
   Plus,
   Layers,
   MessageSquare,
-  Sparkles,
-  BarChart3,
   ExternalLink,
   Edit3,
   Trash2,
   Share2,
   Search,
-  CheckCircle2,
-  Clock,
-  ArrowRight,
   TrendingUp,
   Bot,
   Globe,
-  SlidersHorizontal,
 } from "lucide-react";
-import { formatDate } from "@/lib/utils";
 
 export default function DashboardPage() {
+  const router = useRouter();
   const [forms, setForms] = useState<FormData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -38,11 +33,7 @@ export default function DashboardPage() {
   const [newDescription, setNewDescription] = useState("");
   const [creating, setCreating] = useState(false);
 
-  useEffect(() => {
-    fetchForms();
-  }, []);
-
-  const fetchForms = async () => {
+  const fetchForms = React.useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch("/api/forms");
@@ -55,7 +46,11 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchForms();
+  }, [fetchForms]);
 
   const handleTogglePublish = async (form: FormData) => {
     try {
@@ -110,7 +105,7 @@ export default function DashboardPage() {
         setIsCreateModalOpen(false);
         setNewTitle("");
         setNewDescription("");
-        window.location.href = `/dashboard/forms/${created.id}/edit`;
+        router.push(`/dashboard/forms/${created.id}/edit`);
       }
     } catch (err) {
       console.error("Failed to create form:", err);

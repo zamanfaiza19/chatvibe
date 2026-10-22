@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Bot, Layers, Sparkles, Menu, X, ArrowRight, ExternalLink } from "lucide-react";
+import { Bot, Menu, X, ArrowRight, ExternalLink } from "lucide-react";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

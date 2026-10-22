@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { QuestionData } from "@/types";
 
 export async function GET() {
   try {
@@ -71,7 +72,7 @@ export async function POST(request: Request) {
         completionMessage,
         published,
         questions: {
-          create: questions.map((q: any, index: number) => ({
+          create: questions.map((q: QuestionData, index: number) => ({
             order: index,
             type: q.type || "text",
             title: q.title || "Question",

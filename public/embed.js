@@ -28,7 +28,7 @@
     try {
       const url = new URL(scriptSrc);
       return url.origin;
-    } catch (e) {
+    } catch {
       return window.location.origin;
     }
   })();
