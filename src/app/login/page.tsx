@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MessageSquare, ArrowRight, CheckCircle2, AlertCircle, Eye, EyeOff } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialMode = searchParams.get("mode") === "signup" ? "signup" : "login";
@@ -222,5 +222,19 @@ export default function LoginPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-umber-950 flex items-center justify-center text-amber-200">
+          <div className="size-8 border-2 border-bronze-400 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }
