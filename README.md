@@ -1,9 +1,9 @@
-# Formchat — Interactive Form Builder with Chatbot Widget
+# ChatVibe — Interactive Form Builder with Chatbot Widget
 
 > **Full-Stack Conversational Form Platform & Embeddable Chatbot Widget**  
 > Built with Next.js (App Router), React 19, TypeScript, Tailwind CSS v3, Prisma ORM, and PostgreSQL.
 
-![Formchat Banner](https://img.shields.io/badge/Formchat-Interactive_Forms_%26_Chatbot-a96325?style=for-the-badge)
+![ChatVibe Banner](https://img.shields.io/badge/Formchat-Interactive_Forms_%26_Chatbot-a96325?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
