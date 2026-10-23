@@ -150,7 +150,7 @@ export default function DashboardPage() {
             <Link
               id="create-form-btn"
               href="/dashboard/forms/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-bronze-metal text-umber-950 text-sm font-bold shadow-[0_4px_20px_-4px_rgba(203,125,46,0.6)] hover:brightness-110 transition-all active:scale-95"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-bronze-metal text-umber-950 text-sm font-bold shadow-[0_4px_20px_-4px_rgba(129,158,113,0.6)] hover:brightness-110 transition-all active:scale-95"
             >
               <Plus className="w-4 h-4" />
               <span>Create New Form</span>

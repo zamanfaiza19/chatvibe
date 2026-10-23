@@ -123,7 +123,7 @@ export default async function LandingPage() {
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/dashboard/forms/new"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-bronze-metal text-umber-950 font-bold text-[15px] shadow-[0_10px_30px_-10px_rgba(203,125,46,0.6)] hover:brightness-110 active:scale-95 transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-bronze-metal text-umber-950 font-bold text-[15px] shadow-[0_10px_30px_-10px_rgba(129,158,113,0.6)] hover:brightness-110 active:scale-95 transition-all"
             >
               <span>Create a free form</span>
               <ArrowRight className="w-4 h-4" />
@@ -362,7 +362,7 @@ export default async function LandingPage() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="/dashboard/forms/new"
-                className="bg-bronze-metal rounded-full px-6 py-3 text-[15px] font-semibold text-umber-950 shadow-[0_10px_30px_-10px_rgba(203,125,46,0.6)] hover:brightness-110 active:scale-95 transition-all"
+                className="bg-bronze-metal rounded-full px-6 py-3 text-[15px] font-semibold text-umber-950 shadow-[0_10px_30px_-10px_rgba(129,158,113,0.6)] hover:brightness-110 active:scale-95 transition-all"
               >
                 Build your own
               </Link>

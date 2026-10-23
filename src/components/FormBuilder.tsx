@@ -30,14 +30,14 @@ interface FormBuilderProps {
 }
 
 const PRESET_COLORS = [
-  "#a96325", // Bronze (Formchat Primary)
-  "#cb7d2e", // Warm Gold
-  "#df9644", // Amber Bronze
-  "#874d22", // Russet Umber
+  "#819e71", // Sage Green (ChatVibe Swatch)
+  "#c4dfb9", // Pistachio Green (ChatVibe Swatch)
+  "#6d9a5e", // Forest Green
+  "#4d673f", // Deep Moss
   "#059669", // Emerald
   "#0284c7", // Sky
   "#7c3aed", // Violet
-  "#db2777", // Rose
+  "#cb7d2e", // Warm Gold
 ];
 
 const PRESET_AVATARS = ["🥐", "💬", "🤖", "✨", "⚡", "💼", "👋", "🌟"];

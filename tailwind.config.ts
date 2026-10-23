@@ -10,31 +10,33 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Dark background and border scales derived from deep forest sage
         umber: {
-          50: "#faf5ef",
-          100: "#f1e7dc",
-          200: "#e0cfbd",
-          300: "#c8b098",
-          400: "#a68c74",
-          500: "#85705c",
-          600: "#665546",
-          700: "#4b3d31",
-          800: "#33281f",
-          900: "#221912",
-          950: "#140e0a",
+          50: "#f4f7f2",
+          100: "#e5ece1",
+          200: "#cddcc6",
+          300: "#abc5a1",
+          400: "#819e71", // Swatch 1 primary deep sage (#819e71)
+          500: "#658256",
+          600: "#4d673f",
+          700: "#384d2d",
+          800: "#22321c",
+          900: "#142010",
+          950: "#0b1409",
         },
+        // Accent scales derived from soft pistachio swatch (#c4dfb9)
         bronze: {
-          50: "#fdf6ec",
-          100: "#fae8cf",
-          200: "#f4cd98",
-          300: "#ebb066",
-          400: "#df9644",
-          500: "#cb7d2e",
-          600: "#a96325",
-          700: "#874d22",
-          800: "#6c3e20",
-          900: "#58341d",
-          950: "#321a0d",
+          50: "#f6faf3",
+          100: "#e9f4e3",
+          200: "#d6eccb",
+          300: "#c4dfb9", // Swatch 2 pistachio green (#c4dfb9)
+          400: "#a9ce9a",
+          500: "#8cb87c",
+          600: "#6d9a5e",
+          700: "#547947",
+          800: "#425f38",
+          900: "#33492c",
+          950: "#182614",
         },
         brand: {
           50: "#eef2ff",

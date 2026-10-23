@@ -57,7 +57,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/dashboard/forms/new"
-              className="bg-bronze-metal rounded-full px-5 py-2 text-sm font-semibold text-umber-950 shadow-[0_4px_16px_-4px_rgba(203,125,46,0.5)] hover:brightness-110 active:scale-95 transition-all"
+              className="bg-bronze-metal rounded-full px-5 py-2 text-sm font-semibold text-umber-950 shadow-[0_4px_16px_-4px_rgba(129,158,113,0.5)] hover:brightness-110 active:scale-95 transition-all"
             >
               <span>Create a free form</span>
             </Link>
