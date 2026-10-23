@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Seeding initial forms and submissions...");
+  console.log("Seeding Formchat initial forms and submissions...");
 
   // Delete existing records to avoid duplicates on re-seeding
   await prisma.answer.deleteMany();
@@ -11,56 +11,51 @@ async function main() {
   await prisma.question.deleteMany();
   await prisma.form.deleteMany();
 
-  // Create sample published form 1: Product Feedback & Discovery
+  // Create sample published form 1: Sunny Side Bakery (Cake Order)
   const form1 = await prisma.form.create({
     data: {
-      title: "Product Feedback & Discovery",
-      description: "Gather feedback from early adopters and understand key customer needs.",
+      title: "Sunny Side Bakery",
+      description: "Cake ordering form for celebrations, weddings, and events.",
       published: true,
-      botName: "PulseBot",
-      botAvatar: "⚡",
-      themeColor: "#4f46e5",
-      welcomeMessage: "Hey there! 👋 We'd love your quick feedback to help us build a better experience for you.",
-      completionMessage: "Thank you so much! 🎉 Your feedback is incredibly valuable to our team.",
+      botName: "Bakery Assistant",
+      botAvatar: "🥐",
+      themeColor: "#a96325",
+      welcomeMessage: "Hi! 👋 Ordering a celebration cake? I’ll take your details in a few quick questions.",
+      completionMessage: "Thanks! We’ll email you a quote today. 🎂 (This was a demo — response saved!)",
       questions: {
         create: [
           {
             order: 0,
             type: "text",
-            title: "What is your full name?",
-            description: "Let us know how to address you.",
-            placeholder: "e.g. Alex Morgan",
+            title: "What’s your name?",
+            placeholder: "e.g. Maya Lin",
             required: true,
           },
           {
             order: 1,
             type: "email",
-            title: "What is your best email address?",
-            description: "We will only send a quick thank-you note.",
-            placeholder: "alex@company.com",
+            title: "Which email should we send the quote to?",
+            placeholder: "maya@example.com",
             required: true,
           },
           {
             order: 2,
             type: "multiple_choice",
-            title: "How did you find out about us?",
-            description: "Select the option that best matches.",
-            options: JSON.stringify(["Twitter / X", "LinkedIn", "Google Search", "Product Hunt", "Friend or Colleague"]),
+            title: "Which flavour would you like?",
+            options: JSON.stringify(["Chocolate fudge", "Lemon drizzle", "Carrot & walnut", "Vanilla berry"]),
             required: true,
           },
           {
             order: 3,
             type: "yes_no",
-            title: "Would you recommend our tool to colleagues or peers?",
-            description: "Be completely honest with us!",
+            title: "Do you need it delivered?",
             required: true,
           },
           {
             order: 4,
             type: "text",
-            title: "What is one feature you would love to see next?",
-            description: "Optional, but we read every single suggestion.",
-            placeholder: "I'd love to see...",
+            title: "Anything else we should know?",
+            placeholder: "Dietary restrictions, decoration ideas, or delivery date...",
             required: false,
           },
         ],
@@ -75,22 +70,22 @@ async function main() {
   const questions1 = form1.questions;
   const qName = questions1.find((q) => q.type === "text" && q.order === 0);
   const qEmail = questions1.find((q) => q.type === "email");
-  const qSource = questions1.find((q) => q.type === "multiple_choice");
-  const qRec = questions1.find((q) => q.type === "yes_no");
-  const qIdea = questions1.find((q) => q.order === 4);
+  const qFlavour = questions1.find((q) => q.type === "multiple_choice");
+  const qDelivery = questions1.find((q) => q.type === "yes_no");
+  const qNotes = questions1.find((q) => q.order === 4);
 
-  if (qName && qEmail && qSource && qRec && qIdea) {
+  if (qName && qEmail && qFlavour && qDelivery && qNotes) {
     await prisma.submission.create({
       data: {
         formId: form1.id,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 4), // 4 hours ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
         answers: {
           create: [
-            { questionId: qName.id, value: "Sarah Connor" },
-            { questionId: qEmail.id, value: "sarah.connor@cyberdyne.org" },
-            { questionId: qSource.id, value: "Product Hunt" },
-            { questionId: qRec.id, value: "Yes" },
-            { questionId: qIdea.id, value: "Real-time webhook notifications when a submission is received!" },
+            { questionId: qName.id, value: "Maya Lin" },
+            { questionId: qEmail.id, value: "maya@example.com" },
+            { questionId: qFlavour.id, value: "Chocolate fudge" },
+            { questionId: qDelivery.id, value: "Yes" },
+            { questionId: qNotes.id, value: "Needs gluten-free if possible! For a birthday on Saturday." },
           ],
         },
       },
@@ -99,14 +94,14 @@ async function main() {
     await prisma.submission.create({
       data: {
         formId: form1.id,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 18), // 18 hours ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 14), // 14 hours ago
         answers: {
           create: [
-            { questionId: qName.id, value: "David Miller" },
-            { questionId: qEmail.id, value: "david.m@innovate.co" },
-            { questionId: qSource.id, value: "LinkedIn" },
-            { questionId: qRec.id, value: "Yes" },
-            { questionId: qIdea.id, value: "Exporting analytics to Google Sheets" },
+            { questionId: qName.id, value: "Arthur Pendelton" },
+            { questionId: qEmail.id, value: "arthur@manor.co.uk" },
+            { questionId: qFlavour.id, value: "Lemon drizzle" },
+            { questionId: qDelivery.id, value: "No" },
+            { questionId: qNotes.id, value: "Will pick up from the bakery at 10 AM sharp." },
           ],
         },
       },
@@ -115,14 +110,14 @@ async function main() {
     await prisma.submission.create({
       data: {
         formId: form1.id,
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 36), // 36 hours ago
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 28), // 28 hours ago
         answers: {
           create: [
-            { questionId: qName.id, value: "Elena Rostova" },
-            { questionId: qEmail.id, value: "elena@startup.io" },
-            { questionId: qSource.id, value: "Twitter / X" },
-            { questionId: qRec.id, value: "No" },
-            { questionId: qIdea.id, value: "More theme color customizability and font options." },
+            { questionId: qName.id, value: "Clara Oswald" },
+            { questionId: qEmail.id, value: "clara.o@tardis.org" },
+            { questionId: qFlavour.id, value: "Vanilla berry" },
+            { questionId: qDelivery.id, value: "Yes" },
+            { questionId: qNotes.id, value: "Include 'Happy 30th Anniversary' piped in gold." },
           ],
         },
       },
@@ -137,7 +132,7 @@ async function main() {
       published: true,
       botName: "SalesBot",
       botAvatar: "💼",
-      themeColor: "#059669",
+      themeColor: "#df9644",
       welcomeMessage: "Hi there! 👋 Interested in working together? Tell us a bit about your project.",
       completionMessage: "Thanks! We'll review your details and reach out within 24 hours.",
       questions: {

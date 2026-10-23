@@ -7,9 +7,9 @@ export default async function NewFormPage() {
       title: "New Interactive Form",
       description: "Gather feedback and answers conversationally.",
       published: true,
-      botName: "FormBot",
-      botAvatar: "🤖",
-      themeColor: "#4f46e5",
+      botName: "Formchat Assistant",
+      botAvatar: "🥐",
+      themeColor: "#a96325",
       welcomeMessage: "Hi there! 👋 Thanks for visiting. Could you answer a few quick questions for us?",
       completionMessage: "Thank you! 🎉 We have received your responses.",
       questions: {

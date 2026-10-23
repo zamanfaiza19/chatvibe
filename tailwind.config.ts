@@ -10,6 +10,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        umber: {
+          50: "#faf5ef",
+          100: "#f1e7dc",
+          200: "#e0cfbd",
+          300: "#c8b098",
+          400: "#a68c74",
+          500: "#85705c",
+          600: "#665546",
+          700: "#4b3d31",
+          800: "#33281f",
+          900: "#221912",
+          950: "#140e0a",
+        },
+        bronze: {
+          50: "#fdf6ec",
+          100: "#fae8cf",
+          200: "#f4cd98",
+          300: "#ebb066",
+          400: "#df9644",
+          500: "#cb7d2e",
+          600: "#a96325",
+          700: "#874d22",
+          800: "#6c3e20",
+          900: "#58341d",
+          950: "#321a0d",
+        },
         brand: {
           50: "#eef2ff",
           100: "#e0e7ff",
@@ -24,7 +50,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        serif: ["Georgia", "Times New Roman", "serif"],
+        display: ["Plus Jakarta Sans", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
       },
       animation: {
         "fade-in": "fadeIn 0.3s ease-out forwards",

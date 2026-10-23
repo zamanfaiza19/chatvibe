@@ -30,16 +30,17 @@ interface FormBuilderProps {
 }
 
 const PRESET_COLORS = [
-  "#4f46e5", // Indigo
+  "#a96325", // Bronze (Formchat Primary)
+  "#cb7d2e", // Warm Gold
+  "#df9644", // Amber Bronze
+  "#874d22", // Russet Umber
   "#059669", // Emerald
   "#0284c7", // Sky
   "#7c3aed", // Violet
-  "#db2777", // Pink
-  "#ea580c", // Orange
-  "#0f172a", // Slate
+  "#db2777", // Rose
 ];
 
-const PRESET_AVATARS = ["🤖", "✨", "⚡", "💬", "💼", "👋", "🚀", "🌟"];
+const PRESET_AVATARS = ["🥐", "💬", "🤖", "✨", "⚡", "💼", "👋", "🌟"];
 
 export default function FormBuilder({ initialForm }: FormBuilderProps) {
   const [form, setForm] = useState<FormData>(initialForm);
@@ -189,28 +190,28 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100/70 pb-20">
+    <div className="min-h-screen bg-umber-950 text-umber-50 pb-20 font-sans">
       {/* Top action bar */}
-      <div className="bg-white border-b border-slate-200 sticky top-16 z-30 shadow-xs">
+      <div className="bg-umber-900/90 border-b border-umber-800 sticky top-16 z-30 shadow-md backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Link
               href="/dashboard"
-              className="text-xs font-semibold text-slate-500 hover:text-slate-800 transition-colors"
+              className="text-xs font-semibold text-umber-400 hover:text-amber-100 transition-colors"
             >
-              ← Back to Dashboard
+              ← Dashboard
             </Link>
-            <span className="text-slate-300">/</span>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-slate-900 truncate max-w-xs sm:max-w-md">
+            <span className="text-umber-700">/</span>
+            <div className="flex items-center gap-2.5">
+              <span className="text-sm font-bold font-display text-umber-100 truncate max-w-xs sm:max-w-md">
                 {form.title}
               </span>
               <button
                 onClick={togglePublished}
                 className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full border transition-all ${
                   form.published
-                    ? "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100"
-                    : "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100"
+                    ? "bg-emerald-950 text-emerald-300 border-emerald-800 hover:bg-emerald-900"
+                    : "bg-amber-950 text-amber-300 border-amber-800 hover:bg-amber-900"
                 }`}
                 title="Click to toggle publish status"
               >
@@ -222,28 +223,28 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => setShowEmbedModal(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-umber-800 bg-umber-900/60 hover:bg-umber-800 text-umber-200 hover:text-amber-100 text-xs font-semibold transition-colors shadow-2xs"
             >
-              <Share2 className="w-3.5 h-3.5 text-indigo-600" />
+              <Share2 className="w-3.5 h-3.5 text-bronze-400" />
               <span>Share & Embed</span>
             </button>
 
             <Link
               href={`/dashboard/forms/${form.id}/submissions`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-umber-800 bg-umber-900/60 hover:bg-umber-800 text-umber-200 hover:text-amber-100 text-xs font-semibold transition-colors shadow-2xs"
             >
-              <Layers className="w-3.5 h-3.5 text-slate-500" />
+              <Layers className="w-3.5 h-3.5 text-umber-400" />
               <span>Submissions</span>
             </Link>
 
             <button
               onClick={() => handleSave()}
               disabled={isSaving}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all shadow-sm active:scale-95 disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-bronze-metal text-umber-950 text-xs font-bold transition-all shadow-md active:scale-95 hover:brightness-110 disabled:opacity-50"
             >
               {saveSuccess ? (
                 <>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-950" />
                   <span>Saved!</span>
                 </>
               ) : isSaving ? (
@@ -261,8 +262,8 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
 
       {saveError && (
         <div className="max-w-7xl mx-auto px-4 mt-4">
-          <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0" />
+          <div className="p-3 bg-rose-950/80 border border-rose-800 text-rose-200 text-xs rounded-xl flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
             <span>{saveError}</span>
           </div>
         </div>
@@ -274,13 +275,13 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
           {/* Left Column: Editor Tabs (Questions vs Settings) */}
           <div className="lg:col-span-7 space-y-6">
             {/* Editor Tabs Navigation */}
-            <div className="flex bg-white rounded-xl border border-slate-200 p-1 shadow-2xs">
+            <div className="flex bg-umber-900/80 rounded-2xl border border-umber-800 p-1 shadow-2xs">
               <button
                 onClick={() => setActiveTab("questions")}
-                className={`flex-1 py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
+                className={`flex-1 py-2 px-3 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${
                   activeTab === "questions"
-                    ? "bg-indigo-600 text-white shadow-xs"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "bg-bronze-metal text-umber-950 shadow-xs"
+                    : "text-umber-300 hover:text-amber-100"
                 }`}
               >
                 <ListOrdered className="w-4 h-4" />
@@ -288,14 +289,14 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
               </button>
               <button
                 onClick={() => setActiveTab("settings")}
-                className={`flex-1 py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${
+                className={`flex-1 py-2 px-3 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 ${
                   activeTab === "settings"
-                    ? "bg-indigo-600 text-white shadow-xs"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "bg-bronze-metal text-umber-950 shadow-xs"
+                    : "text-umber-300 hover:text-amber-100"
                 }`}
               >
                 <Settings className="w-4 h-4" />
-                <span>Bot & Form Settings</span>
+                <span>Bot &amp; Form Settings</span>
               </button>
             </div>
 
@@ -305,12 +306,12 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                 {questions.map((q, index) => (
                   <div
                     key={q.id || index}
-                    className="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-xs transition-all hover:border-slate-300 relative group"
+                    className="bg-umber-900/40 rounded-2xl border border-umber-800 p-5 shadow-xs transition-all hover:border-bronze-500/50 relative group"
                   >
                     {/* Question Header & Order Controls */}
-                    <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
-                      <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-md bg-slate-100 text-slate-700 text-xs font-bold flex items-center justify-center">
+                    <div className="flex items-center justify-between pb-3 mb-4 border-b border-umber-800/80">
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-6 h-6 rounded-md bg-umber-950 border border-umber-800 text-amber-300 text-xs font-bold flex items-center justify-center font-mono">
                           {index + 1}
                         </span>
                         <select
@@ -318,7 +319,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                           onChange={(e) =>
                             updateQuestion(index, "type", e.target.value as QuestionType)
                           }
-                          className="text-xs font-semibold bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="text-xs font-semibold bg-umber-950 border border-umber-800 rounded-lg px-2.5 py-1 text-umber-200 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                         >
                           <option value="text">📝 Short Text</option>
                           <option value="email">✉️ Email Address</option>
@@ -332,7 +333,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                           onClick={() => moveQuestion(index, "up")}
                           disabled={index === 0}
                           title="Move up"
-                          className="p-1.5 text-slate-400 hover:text-slate-700 disabled:opacity-20 transition-colors"
+                          className="p-1.5 text-umber-400 hover:text-amber-200 disabled:opacity-20 transition-colors"
                         >
                           <ArrowUp className="w-4 h-4" />
                         </button>
@@ -340,14 +341,14 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                           onClick={() => moveQuestion(index, "down")}
                           disabled={index === questions.length - 1}
                           title="Move down"
-                          className="p-1.5 text-slate-400 hover:text-slate-700 disabled:opacity-20 transition-colors"
+                          className="p-1.5 text-umber-400 hover:text-amber-200 disabled:opacity-20 transition-colors"
                         >
                           <ArrowDown className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => deleteQuestion(index)}
                           title="Delete question"
-                          className="p-1.5 text-slate-400 hover:text-rose-600 transition-colors ml-1"
+                          className="p-1.5 text-umber-400 hover:text-rose-400 transition-colors ml-1"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -357,7 +358,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                     {/* Question Content Fields */}
                     <div className="space-y-3.5">
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-bold text-umber-300 mb-1">
                           Question Prompt *
                         </label>
                         <input
@@ -365,12 +366,12 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                           value={q.title}
                           onChange={(e) => updateQuestion(index, "title", e.target.value)}
                           placeholder="e.g. What is your full name?"
-                          className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full px-3 py-2 text-sm bg-umber-950/70 border border-umber-800 text-umber-100 placeholder:text-umber-500 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-slate-500 mb-1">
+                        <label className="block text-xs font-semibold text-umber-400 mb-1">
                           Helper Text or Subtitle (Optional)
                         </label>
                         <input
@@ -378,13 +379,13 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                           value={q.description || ""}
                           onChange={(e) => updateQuestion(index, "description", e.target.value)}
                           placeholder="Additional context shown under the question bubble..."
-                          className="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full px-3 py-1.5 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 placeholder:text-umber-500 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                         />
                       </div>
 
                       {(q.type === "text" || q.type === "email") && (
                         <div>
-                          <label className="block text-xs font-semibold text-slate-500 mb-1">
+                          <label className="block text-xs font-semibold text-umber-400 mb-1">
                             Input Placeholder
                           </label>
                           <input
@@ -392,7 +393,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                             value={q.placeholder || ""}
                             onChange={(e) => updateQuestion(index, "placeholder", e.target.value)}
                             placeholder={q.type === "email" ? "e.g. you@company.com" : "e.g. Type answer here..."}
-                            className="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full px-3 py-1.5 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 placeholder:text-umber-500 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                           />
                         </div>
                       )}
@@ -400,25 +401,25 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                       {/* Multiple Choice Options Editor */}
                       {q.type === "multiple_choice" && (
                         <div className="pt-2">
-                          <label className="block text-xs font-bold text-slate-700 mb-2">
+                          <label className="block text-xs font-bold text-umber-300 mb-2">
                             Choice Options
                           </label>
                           <div className="space-y-2">
                             {(q.options || []).map((opt, optIdx) => (
                               <div key={optIdx} className="flex items-center gap-2">
-                                <span className="text-xs text-slate-400 font-mono w-4">
+                                <span className="text-xs text-umber-400 font-mono w-4">
                                   {optIdx + 1}.
                                 </span>
                                 <input
                                   type="text"
                                   value={opt}
                                   onChange={(e) => updateOption(index, optIdx, e.target.value)}
-                                  className="flex-1 px-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                  className="flex-1 px-3 py-1.5 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 rounded-lg focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                                 />
                                 <button
                                   onClick={() => removeOption(index, optIdx)}
                                   disabled={(q.options || []).length <= 1}
-                                  className="p-1 text-slate-400 hover:text-rose-500 disabled:opacity-20"
+                                  className="p-1 text-umber-400 hover:text-rose-400 disabled:opacity-20"
                                 >
                                   <Trash2 className="w-3.5 h-3.5" />
                                 </button>
@@ -426,7 +427,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                             ))}
                             <button
                               onClick={() => addOption(index)}
-                              className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 pt-1"
+                              className="text-xs font-semibold text-amber-300 hover:text-amber-200 flex items-center gap-1 pt-1"
                             >
                               <Plus className="w-3.5 h-3.5" />
                               <span>Add another choice option</span>
@@ -436,13 +437,13 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                       )}
 
                       {/* Required Question Switch */}
-                      <div className="pt-2 flex items-center justify-between border-t border-slate-100">
-                        <label className="text-xs font-semibold text-slate-600 cursor-pointer flex items-center gap-2">
+                      <div className="pt-2 flex items-center justify-between border-t border-umber-800/80">
+                        <label className="text-xs font-semibold text-umber-300 cursor-pointer flex items-center gap-2">
                           <input
                             type="checkbox"
                             checked={q.required}
                             onChange={(e) => updateQuestion(index, "required", e.target.checked)}
-                            className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4"
+                            className="rounded accent-bronze-500 w-4 h-4"
                           />
                           <span>Required question (user must answer before continuing)</span>
                         </label>
@@ -452,37 +453,37 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                 ))}
 
                 {/* Add Question Button Strip */}
-                <div className="bg-white rounded-2xl border border-dashed border-slate-300 p-4 text-center">
-                  <p className="text-xs font-bold text-slate-600 mb-3 uppercase tracking-wider">
+                <div className="bg-umber-900/20 rounded-2xl border border-dashed border-umber-800 p-5 text-center">
+                  <p className="text-xs font-bold text-amber-200/90 mb-3 uppercase tracking-wider">
                     Add New Question
                   </p>
-                  <div className="flex flex-wrap items-center justify-center gap-2">
+                  <div className="flex flex-wrap items-center justify-center gap-2.5">
                     <button
                       onClick={() => addQuestion("text")}
-                      className="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all flex items-center gap-1.5"
+                      className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-umber-900/60 hover:bg-umber-800 border border-umber-800 hover:border-bronze-500 text-umber-200 hover:text-amber-100 transition-all flex items-center gap-1.5"
                     >
-                      <Type className="w-3.5 h-3.5 text-indigo-500" />
+                      <Type className="w-3.5 h-3.5 text-bronze-400" />
                       <span>+ Short Text</span>
                     </button>
                     <button
                       onClick={() => addQuestion("email")}
-                      className="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all flex items-center gap-1.5"
+                      className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-umber-900/60 hover:bg-umber-800 border border-umber-800 hover:border-bronze-500 text-umber-200 hover:text-amber-100 transition-all flex items-center gap-1.5"
                     >
-                      <Mail className="w-3.5 h-3.5 text-emerald-500" />
+                      <Mail className="w-3.5 h-3.5 text-emerald-400" />
                       <span>+ Email</span>
                     </button>
                     <button
                       onClick={() => addQuestion("multiple_choice")}
-                      className="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all flex items-center gap-1.5"
+                      className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-umber-900/60 hover:bg-umber-800 border border-umber-800 hover:border-bronze-500 text-umber-200 hover:text-amber-100 transition-all flex items-center gap-1.5"
                     >
-                      <ListOrdered className="w-3.5 h-3.5 text-amber-500" />
+                      <ListOrdered className="w-3.5 h-3.5 text-amber-400" />
                       <span>+ Multiple Choice</span>
                     </button>
                     <button
                       onClick={() => addQuestion("yes_no")}
-                      className="px-3 py-2 text-xs font-semibold rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-600 transition-all flex items-center gap-1.5"
+                      className="px-3.5 py-2 text-xs font-semibold rounded-xl bg-umber-900/60 hover:bg-umber-800 border border-umber-800 hover:border-bronze-500 text-umber-200 hover:text-amber-100 transition-all flex items-center gap-1.5"
                     >
-                      <ToggleLeft className="w-3.5 h-3.5 text-violet-500" />
+                      <ToggleLeft className="w-3.5 h-3.5 text-violet-400" />
                       <span>+ Yes / No</span>
                     </button>
                   </div>
@@ -492,29 +493,29 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
 
             {/* TAB 2: Bot & Form Settings */}
             {activeTab === "settings" && (
-              <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-6">
+              <div className="bg-umber-900/40 rounded-2xl border border-umber-800 p-6 shadow-xs space-y-6">
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm mb-1 flex items-center gap-2">
-                    <Settings className="w-4 h-4 text-indigo-600" />
+                  <h3 className="font-bold font-display text-umber-50 text-base mb-1 flex items-center gap-2">
+                    <Settings className="w-4 h-4 text-bronze-400" />
                     <span>General Form Information</span>
                   </h3>
-                  <p className="text-xs text-slate-500 mb-4">
+                  <p className="text-xs text-umber-400 mb-4">
                     Basic details that appear on the form&apos;s header and dashboard.
                   </p>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-umber-300 mb-1">
                         Form Title
                       </label>
                       <input
                         type="text"
                         value={form.title}
                         onChange={(e) => setForm({ ...form, title: e.target.value })}
-                        className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 text-sm bg-umber-950/70 border border-umber-800 text-umber-100 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-umber-300 mb-1">
                         Form Description
                       </label>
                       <textarea
@@ -522,25 +523,25 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                         onChange={(e) => setForm({ ...form, description: e.target.value })}
                         rows={2}
                         placeholder="Explain what this form is for..."
-                        className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100">
-                  <h3 className="font-bold text-slate-900 text-sm mb-1 flex items-center gap-2">
-                    <Bot className="w-4 h-4 text-indigo-600" />
-                    <span>Chatbot Persona & Theme</span>
+                <div className="pt-4 border-t border-umber-800/80">
+                  <h3 className="font-bold font-display text-umber-50 text-base mb-1 flex items-center gap-2">
+                    <Bot className="w-4 h-4 text-bronze-400" />
+                    <span>Chatbot Persona &amp; Theme</span>
                   </h3>
-                  <p className="text-xs text-slate-500 mb-4">
+                  <p className="text-xs text-umber-400 mb-4">
                     Customize your chatbot&apos;s avatar, bot name, and branding color.
                   </p>
 
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-bold text-umber-300 mb-1">
                           Bot Name
                         </label>
                         <input
@@ -550,15 +551,15 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                             setForm({ ...form, botName: e.target.value });
                             refreshPreview();
                           }}
-                          className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full px-3 py-2 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
+                        <label className="block text-xs font-bold text-umber-300 mb-1">
                           Bot Avatar Emoji
                         </label>
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 flex-wrap">
                           {PRESET_AVATARS.map((av) => (
                             <button
                               key={av}
@@ -569,8 +570,8 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                               }}
                               className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm border transition-all ${
                                 form.botAvatar === av
-                                  ? "border-indigo-500 bg-indigo-50 scale-105"
-                                  : "border-slate-200 hover:bg-slate-100"
+                                  ? "border-bronze-500 bg-bronze-950/80 scale-105"
+                                  : "border-umber-800 bg-umber-950/50 hover:bg-umber-800"
                               }`}
                             >
                               {av}
@@ -581,11 +582,11 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-2">
-                        <Palette className="w-3.5 h-3.5 text-indigo-600" />
+                      <label className="block text-xs font-bold text-umber-300 mb-1 flex items-center gap-2">
+                        <Palette className="w-3.5 h-3.5 text-bronze-400" />
                         <span>Theme Brand Color</span>
                       </label>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 flex-wrap">
                         <div className="flex items-center gap-2">
                           {PRESET_COLORS.map((col) => (
                             <button
@@ -598,29 +599,29 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                               style={{ backgroundColor: col }}
                               className={`w-7 h-7 rounded-full transition-transform ${
                                 form.themeColor === col
-                                  ? "scale-110 ring-2 ring-offset-2 ring-indigo-500"
+                                  ? "scale-110 ring-2 ring-offset-2 ring-offset-umber-950 ring-bronze-400"
                                   : "hover:scale-105"
                               }`}
                             />
                           ))}
                         </div>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-2">
                           <input
                             type="color"
-                            value={form.themeColor || "#4f46e5"}
+                            value={form.themeColor || "#a96325"}
                             onChange={(e) => {
                               setForm({ ...form, themeColor: e.target.value });
                               refreshPreview();
                             }}
-                            className="w-7 h-7 rounded-lg cursor-pointer border border-slate-200"
+                            className="w-7 h-7 rounded-lg cursor-pointer border border-umber-800 bg-transparent"
                           />
-                          <span className="text-xs font-mono text-slate-500">{form.themeColor}</span>
+                          <span className="text-xs font-mono text-amber-200">{form.themeColor}</span>
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-umber-300 mb-1">
                         Welcome Message (Opening greeting)
                       </label>
                       <textarea
@@ -630,12 +631,12 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                           refreshPreview();
                         }}
                         rows={2}
-                        className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-bold text-umber-300 mb-1">
                         Completion Message (After answering all questions)
                       </label>
                       <textarea
@@ -645,7 +646,7 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                           refreshPreview();
                         }}
                         rows={2}
-                        className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full px-3 py-2 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
                       />
                     </div>
                   </div>
@@ -656,23 +657,23 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
 
           {/* Right Column: Live Interactive Preview */}
           <div className="lg:col-span-5 sticky top-36">
-            <div className="bg-white rounded-2xl border border-slate-200/90 shadow-md overflow-hidden">
-              <div className="px-4 py-3 bg-slate-50 border-b border-slate-200/80 flex items-center justify-between">
+            <div className="bg-umber-900/60 rounded-2xl border border-umber-800 shadow-2xl overflow-hidden ring-1 ring-white/5">
+              <div className="px-4 py-3 bg-umber-950 border-b border-umber-800 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span className="text-xs font-bold text-slate-700">Live Interactive Preview</span>
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                  <span className="text-xs font-bold text-amber-100">Live Interactive Preview</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={refreshPreview}
-                    className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1"
+                    className="text-xs text-amber-300 hover:text-amber-200 font-semibold flex items-center gap-1"
                   >
                     <span>Restart Test</span>
                   </button>
                   <a
                     href={`/f/${form.id}`}
                     target="_blank"
-                    className="p-1 text-slate-400 hover:text-slate-600 rounded"
+                    className="p-1 text-umber-400 hover:text-amber-200 rounded"
                     title="Open standalone page in new tab"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -680,12 +681,12 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                 </div>
               </div>
 
-              <div className="h-[580px] bg-slate-100 flex flex-col">
+              <div className="h-[580px] bg-white flex flex-col">
                 <ChatbotWidget key={previewKey} form={previewFormObject} isPreview={true} />
               </div>
             </div>
 
-            <p className="text-[11px] text-center text-slate-400 mt-2">
+            <p className="text-[11px] text-center text-umber-400 mt-2">
               💡 Test questions in real-time. Submissions in preview mode won&apos;t pollute production data.
             </p>
           </div>

@@ -33,7 +33,7 @@ export default async function EditFormPage(props: { params: Promise<{ id: string
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-umber-950 text-umber-50 flex flex-col font-sans">
       <Navbar />
       <FormBuilder initialForm={parsedForm} />
     </div>

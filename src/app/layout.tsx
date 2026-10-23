@@ -13,9 +13,9 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "FormCraft | Interactive Form Builder & Chatbot Widget",
+  title: "Formchat — Interactive Form Builder with Chatbot Widget",
   description:
-    "Build modern conversational forms, embed floating chatbot widgets on any website, collect responses, and manage submissions through a powerful dashboard.",
+    "Build conversational forms that feel like a chat, embed them on any website with a single script tag, and collect answers seamlessly in your dashboard.",
   keywords: [
     "form builder",
     "chatbot widget",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "customer feedback",
     "lead qualification",
   ],
-  authors: [{ name: "FormCraft Team" }],
+  authors: [{ name: "Formchat Team" }],
 };
 
 export default function RootLayout({
@@ -35,9 +35,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-slate-50 text-slate-900">
+      <body className="min-h-full flex flex-col font-sans bg-umber-950 text-umber-50 selection:bg-bronze-500 selection:text-umber-950">
         {children}
       </body>
     </html>
   );
 }
+

@@ -230,6 +230,7 @@ export default function ChatbotWidget({
     if (onClose) {
       onClose();
     } else {
+      window.parent.postMessage({ type: "formchat:close" }, "*");
       window.parent.postMessage({ type: "FORMCRAFT_CLOSE" }, "*");
     }
   };
@@ -258,7 +259,7 @@ export default function ChatbotWidget({
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-bold text-base tracking-tight leading-tight">{form.botName || "FormCraft Bot"}</h3>
+              <h3 className="font-bold text-base tracking-tight leading-tight">{form.botName || "Formchat Assistant"}</h3>
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
@@ -474,7 +475,7 @@ export default function ChatbotWidget({
           </div>
         ) : (
           <div className="py-2 text-center text-xs text-slate-400">
-            {isSubmitting ? "Saving your response..." : "Powered by FormCraft Interactive"}
+            {isSubmitting ? "Saving your response..." : "Powered by Formchat"}
           </div>
         )}
       </div>

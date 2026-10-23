@@ -37,9 +37,9 @@ export async function POST(request: Request) {
     const {
       title = "Untitled Form",
       description = "",
-      botName = "FormBot",
-      botAvatar = "🤖",
-      themeColor = "#4f46e5",
+      botName = "Formchat Assistant",
+      botAvatar = "🥐",
+      themeColor = "#a96325",
       welcomeMessage = "Hi there! 👋 Could you answer a few quick questions for us?",
       completionMessage = "Thank you! 🎉 We have received your answers.",
       published = true,

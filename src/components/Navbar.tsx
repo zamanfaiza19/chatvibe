@@ -2,62 +2,64 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Bot, Menu, X, ArrowRight, ExternalLink } from "lucide-react";
+import { MessageSquare, Menu, X, ArrowRight, ExternalLink } from "lucide-react";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 border-b border-umber-800/60 bg-umber-950/85 backdrop-blur-md transition-all">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              <Bot className="w-5 h-5" />
+            <div className="w-8 h-8 rounded-lg bg-bronze-metal flex items-center justify-center text-umber-950 shadow-md group-hover:scale-105 transition-transform">
+              <MessageSquare className="w-4 h-4 fill-umber-950" />
             </div>
-            <div>
-              <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-slate-900 to-indigo-950 bg-clip-text text-transparent">
-                Form<span className="text-indigo-600">Craft</span>
-              </span>
-              <span className="hidden sm:inline-block ml-1.5 px-1.5 py-0.5 text-[10px] uppercase font-bold tracking-wider bg-indigo-50 text-indigo-700 rounded border border-indigo-200">
-                Interactive
+            <div className="flex items-center gap-2">
+              <span className="font-display font-bold text-xl tracking-tight text-umber-50">
+                Formchat
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
-            <Link href="/#features" className="hover:text-indigo-600 transition-colors">
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-umber-300">
+            <Link href="/#features" className="hover:text-amber-100 transition-colors">
               Features
             </Link>
-            <Link href="/#how-it-works" className="hover:text-indigo-600 transition-colors">
-              How It Works
+            <Link href="/#how-it-works" className="hover:text-amber-100 transition-colors">
+              How it works
             </Link>
-            <Link href="/#live-demo" className="hover:text-indigo-600 transition-colors">
-              Live Demo
+            <Link href="/#demo" className="hover:text-amber-100 transition-colors">
+              Demo
             </Link>
             <Link
               href="/test-embed.html"
               target="_blank"
-              className="hover:text-indigo-600 transition-colors flex items-center gap-1 text-slate-500 hover:text-indigo-600"
+              className="hover:text-amber-100 transition-colors flex items-center gap-1.5 text-amber-200/90"
             >
-              <span>Embed Demo</span>
+              <span>Bakery Test Site</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
-            <Link href="/dashboard" className="hover:text-indigo-600 transition-colors">
+            <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
               Dashboard
             </Link>
-          </div>
+          </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-4">
             <Link
               href="/dashboard"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all active:scale-95"
+              className="text-sm font-medium text-umber-300 hover:text-amber-100 transition-colors"
             >
-              <span>Open Dashboard</span>
-              <ArrowRight className="w-4 h-4" />
+              Log in
+            </Link>
+            <Link
+              href="/dashboard/forms/new"
+              className="bg-bronze-metal rounded-full px-5 py-2 text-sm font-semibold text-umber-950 shadow-[0_4px_16px_-4px_rgba(203,125,46,0.5)] hover:brightness-110 active:scale-95 transition-all"
+            >
+              <span>Create a free form</span>
             </Link>
           </div>
 
@@ -65,7 +67,7 @@ export default function Navbar() {
           <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
+              className="p-2 rounded-lg text-umber-300 hover:text-amber-100 hover:bg-umber-900/60 focus:outline-none"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -75,25 +77,25 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-3 pb-6 space-y-3 animate-slide-up">
+        <div className="md:hidden border-b border-umber-800 bg-umber-950 px-4 pt-3 pb-6 space-y-3 animate-slide-up">
           <Link
             href="/#features"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-slate-700 hover:bg-slate-50 rounded-lg"
+            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
           >
             Features
           </Link>
           <Link
             href="/#how-it-works"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-slate-700 hover:bg-slate-50 rounded-lg"
+            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
           >
-            How It Works
+            How it works
           </Link>
           <Link
-            href="/#live-demo"
+            href="/#demo"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-slate-700 hover:bg-slate-50 rounded-lg"
+            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
           >
             Live Demo
           </Link>
@@ -101,30 +103,30 @@ export default function Navbar() {
             href="/test-embed.html"
             target="_blank"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-between px-3 py-2 text-base font-semibold text-slate-700 hover:bg-slate-50 rounded-lg"
+            className="flex items-center justify-between px-3 py-2 text-base font-semibold text-amber-200 hover:bg-umber-900 rounded-lg"
           >
-            <span>External Embed Demo</span>
+            <span>Sunny Side Bakery Test</span>
             <ExternalLink className="w-4 h-4" />
           </Link>
           <Link
             href="/dashboard"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-indigo-600 hover:bg-indigo-50 rounded-lg"
+            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
           >
             Dashboard
           </Link>
           <div className="pt-2">
             <Link
-              href="/dashboard"
+              href="/dashboard/forms/new"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold bg-indigo-600 text-white"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full text-sm font-semibold bg-bronze-metal text-umber-950"
             >
-              <span>Go to Dashboard</span>
+              <span>Create a free form</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

@@ -1,86 +1,95 @@
 import Link from "next/link";
-import { Bot } from "lucide-react";
+import { MessageSquare, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400 py-16 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="border-t border-umber-800/80 bg-umber-950 text-umber-400 py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand info */}
           <div className="md:col-span-1 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5 text-white">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-                <Bot className="w-5 h-5" />
+            <Link href="/" className="flex items-center gap-2.5 text-umber-50 group">
+              <div className="size-7 rounded-lg bg-bronze-metal flex items-center justify-center text-umber-950 shadow-md">
+                <MessageSquare className="w-3.5 h-3.5 fill-umber-950" />
               </div>
-              <span className="font-bold text-lg tracking-tight">
-                Form<span className="text-indigo-400">Craft</span>
-              </span>
+              <span className="font-display font-bold text-lg tracking-tight">Formchat</span>
             </Link>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              Transform boring static forms into dynamic conversational chatbots. Boost engagement, increase completion rates, and collect rich responses.
+            <p className="text-sm text-umber-300 leading-relaxed">
+              Build forms, embed them on any website as a friendly chat widget and manage every response from one dashboard.
             </p>
           </div>
 
           {/* Product links */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Product</h4>
-            <ul className="space-y-2.5 text-sm">
+            <h4 className="text-sm font-semibold text-umber-100 mb-4">Product</h4>
+            <ul className="space-y-2.5 text-sm text-umber-300">
               <li>
-                <Link href="/dashboard" className="hover:text-white transition-colors">
-                  Form Builder
+                <Link href="/#features" className="hover:text-amber-100 transition-colors">
+                  Features
                 </Link>
               </li>
               <li>
-                <Link href="/#live-demo" className="hover:text-white transition-colors">
-                  Chatbot Widget Demo
+                <Link href="/#how-it-works" className="hover:text-amber-100 transition-colors">
+                  How it works
                 </Link>
               </li>
               <li>
-                <Link href="/test-embed.html" target="_blank" className="hover:text-white transition-colors">
-                  Website Embed Demo
+                <Link href="/#demo" className="hover:text-amber-100 transition-colors">
+                  Live demo
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard" className="hover:text-white transition-colors">
-                  Analytics & Submissions
+                <Link href="/test-embed.html" target="_blank" className="hover:text-amber-100 transition-colors flex items-center gap-1">
+                  <span>Bakery Test Site</span>
+                  <ExternalLink className="w-3 h-3 text-umber-400" />
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Features */}
+          {/* Account */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Features</h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>One-question-at-a-time chat</li>
-              <li>Multiple choice & Yes/No pills</li>
-              <li>Input validation & required flags</li>
-              <li>Customizable bot avatars & colors</li>
-              <li>Instant JavaScript snippet embed</li>
+            <h4 className="text-sm font-semibold text-umber-100 mb-4">Account</h4>
+            <ul className="space-y-2.5 text-sm text-umber-300">
+              <li>
+                <Link href="/dashboard/forms/new" className="hover:text-amber-100 transition-colors">
+                  Create Form
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
+                  Responses & Analytics
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Software Engineer Intern Project Specs */}
+          {/* Contact & Stack */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-4">Project Overview</h4>
-            <p className="text-xs text-slate-400 mb-3 leading-relaxed">
-              Software Engineer Intern Project Deliverable. Built with Next.js, React, TypeScript, Tailwind CSS, and Prisma SQLite.
+            <h4 className="text-sm font-semibold text-umber-100 mb-4">Open Source</h4>
+            <p className="text-xs text-umber-400 mb-3 leading-relaxed">
+              Formchat is an open-source project built with Next.js, SQLite/Supabase, and Tailwind CSS.
             </p>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-indigo-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>All Completion Criteria Met</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-umber-900/80 border border-umber-800 text-xs text-amber-300 font-medium">
+              <span className="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>All Systems Operational</span>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} FormCraft Interactive. All rights reserved.</p>
+        <div className="pt-8 border-t border-umber-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-umber-500 gap-4">
+          <p>© {new Date().getFullYear()} Formchat. Forms that feel like a conversation.</p>
           <div className="flex items-center gap-6">
-            <Link href="/dashboard" className="hover:text-slate-400 transition-colors">
+            <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
               User Dashboard
             </Link>
-            <Link href="/test-embed.html" target="_blank" className="hover:text-slate-400 transition-colors">
-              External Embed Demo
+            <Link href="/test-embed.html" target="_blank" className="hover:text-amber-100 transition-colors">
+              Bakery Testbed
             </Link>
           </div>
         </div>

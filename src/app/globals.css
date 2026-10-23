@@ -40,8 +40,20 @@ body {
 }
 
 .glass-panel-dark {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(20, 14, 10, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(51, 65, 85, 0.8);
+  border: 1px solid rgba(51, 40, 31, 0.8);
+}
+
+/* Bronze metal luxury gradients matching Formchat */
+.text-bronze-metal {
+  background-image: linear-gradient(175deg, #fdf6ec 5%, #f4cd98 35%, #df9644 70%, #a96325 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.bg-bronze-metal {
+  background-image: linear-gradient(180deg, #f4cd98 0%, #df9644 45%, #cb7d2e 100%);
 }
