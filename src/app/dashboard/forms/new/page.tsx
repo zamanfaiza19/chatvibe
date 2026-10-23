@@ -1,15 +1,24 @@
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 
 export default async function NewFormPage() {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect("/login");
+  }
+
   const newForm = await prisma.form.create({
     data: {
+      userId: user.id,
       title: "New Interactive Form",
       description: "Gather feedback and answers conversationally.",
       published: true,
       botName: "ChatVibe Assistant",
       botAvatar: "🥐",
-      themeColor: "#a96325",
+      themeColor: "#819e71",
       welcomeMessage: "Hi there! 👋 Thanks for visiting. Could you answer a few quick questions for us?",
       completionMessage: "Thank you! 🎉 We have received your responses.",
       questions: {
