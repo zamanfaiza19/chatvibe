@@ -682,7 +682,13 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
               </div>
 
               <div className="h-[580px] bg-white flex flex-col">
-                <ChatbotWidget key={previewKey} form={previewFormObject} isPreview={true} />
+                <ChatbotWidget
+                  key={previewKey}
+                  form={previewFormObject}
+                  isPreview={true}
+                  showPreviewBadge={true}
+                  showCloseButton={false}
+                />
               </div>
             </div>
 

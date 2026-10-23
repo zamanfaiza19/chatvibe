@@ -9,6 +9,8 @@ import { Send, CheckCircle2, RotateCcw, AlertCircle, X } from "lucide-react";
 interface ChatbotWidgetProps {
   form: FormData;
   isPreview?: boolean;
+  showPreviewBadge?: boolean;
+  showCloseButton?: boolean;
   onClose?: () => void;
   standalone?: boolean;
 }
@@ -24,6 +26,8 @@ interface ChatMessage {
 export default function ChatbotWidget({
   form,
   isPreview = false,
+  showPreviewBadge = false,
+  showCloseButton = false,
   onClose,
   standalone = false,
 }: ChatbotWidgetProps) {
@@ -235,6 +239,8 @@ export default function ChatbotWidget({
     }
   };
 
+  const shouldShowClose = showCloseButton || Boolean(onClose);
+
   const progressPercent =
     questions.length > 0 && currentQuestionIndex >= 0
       ? Math.round((currentQuestionIndex / questions.length) * 100)
@@ -250,29 +256,31 @@ export default function ChatbotWidget({
     >
       {/* Top Header */}
       <div
-        className="px-5 py-4 flex items-center justify-between text-white shrink-0 relative overflow-hidden"
+        className="px-4 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between text-white shrink-0 relative overflow-hidden"
         style={{ backgroundColor: themeColor }}
       >
-        <div className="flex items-center gap-3 z-10">
-          <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-xl shadow-inner border border-white/30">
-            {form.botAvatar || "🤖"}
+        <div className="flex items-center gap-2.5 sm:gap-3 z-10 min-w-0 flex-1 mr-2">
+          <div className="size-9 sm:size-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-lg sm:text-xl shadow-inner border border-white/30 shrink-0">
+            {form.botAvatar || "🥐"}
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="font-bold text-base tracking-tight leading-tight">{form.botName || "Formchat Assistant"}</h3>
-              <span className="flex h-2 w-2 relative">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <h3 className="font-bold text-sm sm:text-base tracking-tight leading-tight truncate">
+                {form.botName || "Formchat Assistant"}
+              </h3>
+              <span className="flex h-2 w-2 relative shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
               </span>
             </div>
-            <p className="text-xs text-white/80 line-clamp-1">{form.title}</p>
+            <p className="text-[11px] sm:text-xs text-white/80 truncate">{form.title}</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1 z-10">
-          {isPreview && (
-            <span className="text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 bg-white/20 rounded-full text-white/90">
-              Preview Mode
+        <div className="flex items-center gap-1.5 z-10 shrink-0">
+          {showPreviewBadge && (
+            <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 bg-black/25 rounded-full text-white/95 border border-white/10 shrink-0">
+              Preview
             </span>
           )}
           <button
@@ -282,7 +290,7 @@ export default function ChatbotWidget({
           >
             <RotateCcw className="w-4 h-4" />
           </button>
-          {(onClose || !standalone) && (
+          {shouldShowClose && (
             <button
               onClick={notifyClose}
               title="Close Widget"

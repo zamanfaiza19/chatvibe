@@ -405,8 +405,14 @@ export default async function LandingPage() {
               </div>
 
               {/* Chatbot widget in bottom corner of mock site */}
-              <div className="h-full sm:h-[490px] sm:w-[350px] sm:absolute sm:right-5 sm:bottom-5 sm:overflow-hidden sm:rounded-2xl sm:shadow-[0_12px_40px_rgba(0,0,0,0.35)] border border-amber-900/10">
-                <ChatbotWidget form={sampleForm} isPreview={true} standalone={false} />
+              <div className="h-full sm:h-[490px] sm:w-[360px] sm:absolute sm:right-5 sm:bottom-5 sm:overflow-hidden sm:rounded-2xl sm:shadow-[0_12px_40px_rgba(0,0,0,0.35)] border border-amber-900/10">
+                <ChatbotWidget
+                  form={sampleForm}
+                  isPreview={false}
+                  showPreviewBadge={false}
+                  showCloseButton={false}
+                  standalone={false}
+                />
               </div>
             </div>
           </div>

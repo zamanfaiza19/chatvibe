@@ -50,12 +50,6 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <Link
-              href="/dashboard"
-              className="text-sm font-medium text-umber-300 hover:text-amber-100 transition-colors"
-            >
-              Log in
-            </Link>
-            <Link
               href="/dashboard/forms/new"
               className="bg-bronze-metal rounded-full px-5 py-2 text-sm font-semibold text-umber-950 shadow-[0_4px_16px_-4px_rgba(203,125,46,0.5)] hover:brightness-110 active:scale-95 transition-all"
             >

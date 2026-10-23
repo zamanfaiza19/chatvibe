@@ -46,7 +46,7 @@ export default async function EmbedPage(props: { params: Promise<{ id: string }>
 
   return (
     <div className="w-full h-screen overflow-hidden bg-white">
-      <ChatbotWidget form={parsedForm} isPreview={false} standalone={false} />
+      <ChatbotWidget form={parsedForm} isPreview={false} showCloseButton={true} standalone={false} />
     </div>
   );
 }
