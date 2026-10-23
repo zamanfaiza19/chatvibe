@@ -1,10 +1,18 @@
 import prisma from "@/lib/prisma";
 import FormBuilder from "@/components/FormBuilder";
 import Navbar from "@/components/Navbar";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
 import { FormData, QuestionType } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function EditFormPage(props: { params: Promise<{ id: string }> }) {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect("/login");
+  }
+
   const { id } = await props.params;
 
   const form = await prisma.form.findUnique({
@@ -21,6 +29,17 @@ export default async function EditFormPage(props: { params: Promise<{ id: string
 
   if (!form) {
     notFound();
+  }
+
+  // If the form has no user assigned (legacy form), assign it to current user; otherwise check ownership
+  if (!form.userId) {
+    await prisma.form.update({
+      where: { id: form.id },
+      data: { userId: user.id },
+    });
+  } else if (user.role !== "admin" && form.userId !== user.id) {
+    // User does not have permission to edit someone else's form
+    redirect("/dashboard");
   }
 
   const parsedForm: FormData = {

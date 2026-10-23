@@ -97,6 +97,33 @@ export default function DashboardPage() {
     }
   };
 
+  const handleCreateNewDirectly = async () => {
+    try {
+      setCreating(true);
+      const res = await fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: "New Interactive Form",
+          description: "Gather feedback and answers conversationally.",
+        }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Failed to create form");
+      }
+
+      const created = await res.json();
+      router.push(`/dashboard/forms/${created.id}/edit`);
+    } catch (err: unknown) {
+      console.error("Create form failed:", err);
+      alert(err instanceof Error ? err.message : "Failed to create form. Please make sure you are logged in.");
+    } finally {
+      setCreating(false);
+    }
+  };
+
   const handleCreateForm = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTitle.trim()) return;
@@ -175,14 +202,15 @@ export default function DashboardPage() {
                 <span>🛡️ Admin Panel</span>
               </Link>
             )}
-            <Link
+            <button
               id="create-form-btn"
-              href="/dashboard/forms/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-bronze-metal text-umber-950 text-sm font-bold shadow-[0_4px_20px_-4px_rgba(129,158,113,0.6)] hover:brightness-110 transition-all active:scale-95"
+              onClick={handleCreateNewDirectly}
+              disabled={creating}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-bronze-metal text-umber-950 text-sm font-bold shadow-[0_4px_20px_-4px_rgba(129,158,113,0.6)] hover:brightness-110 transition-all active:scale-95 disabled:opacity-60 cursor-pointer"
             >
-              <Plus className="w-4 h-4" />
-              <span>Create New Form</span>
-            </Link>
+              <Plus className={`w-4 h-4 ${creating ? "animate-spin" : ""}`} />
+              <span>{creating ? "Creating Form..." : "Create New Form"}</span>
+            </button>
           </div>
         </div>
 
@@ -308,13 +336,14 @@ export default function DashboardPage() {
                 ? `No forms match "${searchQuery}". Try a different search query.`
                 : "Get started by creating your very first conversational chat form."}
             </p>
-            <Link
-              href="/dashboard/forms/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-bronze-metal text-umber-950 text-xs font-bold transition-all shadow-sm"
+            <button
+              onClick={handleCreateNewDirectly}
+              disabled={creating}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-bronze-metal text-umber-950 text-xs font-bold transition-all shadow-sm disabled:opacity-60 cursor-pointer"
             >
-              <Plus className="w-4 h-4" />
-              <span>Create Form</span>
-            </Link>
+              <Plus className={`w-4 h-4 ${creating ? "animate-spin" : ""}`} />
+              <span>{creating ? "Creating..." : "Create Form"}</span>
+            </button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
