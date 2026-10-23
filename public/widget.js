@@ -109,7 +109,7 @@
     launcher.setAttribute("aria-expanded", "false");
     launcher.setAttribute("data-formchat-launcher", slug);
     launcher.innerHTML = CHAT_ICON;
-    var color = colorOverride || "#a96325";
+    var color = colorOverride || "#819e71";
     css(launcher, {
       position: "fixed",
       bottom: "20px",

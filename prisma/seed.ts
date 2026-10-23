@@ -35,7 +35,7 @@ async function main() {
       published: true,
       botName: "Bakery Assistant",
       botAvatar: "🥐",
-      themeColor: "#a96325",
+      themeColor: "#819e71",
       welcomeMessage: "Hi! 👋 Ordering a celebration cake? I’ll take your details in a few quick questions.",
       completionMessage: "Thanks! We’ll email you a quote today. 🎂 (This was a demo — response saved!)",
       questions: {

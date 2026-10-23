@@ -49,7 +49,7 @@ export default async function LandingPage() {
         updatedAt: new Date(),
         botName: "Bakery Assistant",
         botAvatar: "🥐",
-        themeColor: "#a96325",
+        themeColor: "#819e71",
         welcomeMessage: "Hi! 👋 Ordering a celebration cake? I’ll take your details in a few quick questions.",
         completionMessage: "Thanks! We’ll email you a quote today. 🎂 (This was a demo — nothing was saved.)",
         questions: [
@@ -99,7 +99,7 @@ export default async function LandingPage() {
         {/* Warm radial bronze glow */}
         <div
           aria-hidden={true}
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(45%_55%_at_50%_15%,rgba(169,99,37,0.28),transparent)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(45%_55%_at_50%_15%,rgba(129,158,113,0.22),transparent)]"
         />
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -343,7 +343,7 @@ export default async function LandingPage() {
       <section id="demo" className="relative scroll-mt-16 overflow-hidden border-t border-umber-800/80 bg-umber-950 py-20 lg:py-28">
         <div
           aria-hidden={true}
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(45%_60%_at_80%_50%,rgba(169,99,37,0.2),transparent)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(45%_60%_at_80%_50%,rgba(129,158,113,0.2),transparent)]"
         />
 
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.25fr]">
@@ -393,14 +393,14 @@ export default async function LandingPage() {
             <div className="relative bg-[#fff8ef] h-[580px] overflow-hidden">
               {/* Bakery mock page layout */}
               <div aria-hidden={true} className="hidden sm:block p-8">
-                <p className="font-serif text-2xl font-bold text-[#3b2f2f]">
+                <p className="font-serif text-2xl font-bold text-[#142010]">
                   🥐 Sunny Side Bakery
                 </p>
-                <div className="mt-6 h-4 w-3/5 rounded bg-[#f1dfc4]" />
-                <div className="mt-2.5 h-4 w-2/5 rounded bg-[#f1dfc4]" />
+                <div className="mt-6 h-4 w-3/5 rounded bg-[#e5ece1]" />
+                <div className="mt-2.5 h-4 w-2/5 rounded bg-[#e5ece1]" />
                 <div className="mt-8 grid w-1/2 grid-cols-2 gap-3">
-                  <div className="h-20 rounded-xl bg-[#f4d9b0]" />
-                  <div className="h-20 rounded-xl bg-[#f4d9b0]" />
+                  <div className="h-20 rounded-xl bg-[#d6eccb]/60 border border-[#c4dfb9]/40" />
+                  <div className="h-20 rounded-xl bg-[#d6eccb]/60 border border-[#c4dfb9]/40" />
                 </div>
               </div>
 
