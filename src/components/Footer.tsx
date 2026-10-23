@@ -40,7 +40,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/test-embed.html" target="_blank" className="hover:text-amber-100 transition-colors flex items-center gap-1">
-                  <span>Bakery Test Site</span>
+                  <span>Pistachio & Sage Cafe</span>
                   <ExternalLink className="w-3 h-3 text-umber-400" />
                 </Link>
               </li>

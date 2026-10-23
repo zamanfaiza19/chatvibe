@@ -105,7 +105,7 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center justify-between px-3 py-2 text-base font-semibold text-amber-200 hover:bg-umber-900 rounded-lg"
           >
-            <span>Sunny Side Bakery Test</span>
+            <span>Pistachio & Sage Cafe Test</span>
             <ExternalLink className="w-4 h-4" />
           </Link>
           <Link

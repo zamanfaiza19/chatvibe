@@ -26,18 +26,18 @@ async function main() {
     },
   });
 
-  // Create sample published form 1: Sunny Side Bakery (Cake Order)
+  // Create sample published form 1: Pistachio & Sage Cafe
   const form1 = await prisma.form.create({
     data: {
       userId: demoUser.id,
-      title: "Sunny Side Bakery",
-      description: "Cake ordering form for celebrations, weddings, and events.",
+      title: "Pistachio & Sage Cafe",
+      description: "Artisan drinks and treats ordering form.",
       published: true,
-      botName: "Bakery Assistant",
-      botAvatar: "🥐",
+      botName: "Cafe Concierge",
+      botAvatar: "🌿",
       themeColor: "#819e71",
-      welcomeMessage: "Hi! 👋 Ordering a celebration cake? I’ll take your details in a few quick questions.",
-      completionMessage: "Thanks! We’ll email you a quote today. 🎂 (This was a demo — response saved!)",
+      welcomeMessage: "Hi! 👋 Welcome to Pistachio & Sage Cafe. I’ll take your drink & pastry order in a few quick taps.",
+      completionMessage: "Order placed! ☕ We’ll have it freshly prepared for you. (Response saved!)",
       questions: {
         create: [
           {

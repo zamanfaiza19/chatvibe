@@ -20,7 +20,7 @@ export default function EmbedModal({ form, isOpen, onClose }: EmbedModalProps) {
   const publicUrl = `${origin}/f/${form.id}`;
   const embedUrl = `${origin}/embed/${form.id}`;
 
-  const scriptCode = `<!-- Formchat widget -->
+  const scriptCode = `<!-- ChatVibe widget -->
 <script src="${origin}/widget.js" data-form="${form.id}" async></script>`;
 
   const iframeCode = `<iframe

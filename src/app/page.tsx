@@ -42,16 +42,16 @@ export default async function LandingPage() {
       }
     : {
         id: "demo",
-        title: "Sunny Side Bakery",
-        description: "Cake ordering form for celebrations, weddings, and events.",
+        title: "Pistachio & Sage Cafe",
+        description: "Artisan drinks and treats ordering form.",
         published: true,
         createdAt: new Date(),
         updatedAt: new Date(),
-        botName: "Bakery Assistant",
-        botAvatar: "🥐",
+        botName: "Cafe Concierge",
+        botAvatar: "🌿",
         themeColor: "#819e71",
-        welcomeMessage: "Hi! 👋 Ordering a celebration cake? I’ll take your details in a few quick questions.",
-        completionMessage: "Thanks! We’ll email you a quote today. 🎂 (This was a demo — nothing was saved.)",
+        welcomeMessage: "Hi! 👋 Welcome to Pistachio & Sage Cafe. I’ll take your drink & pastry order in a few quick taps.",
+        completionMessage: "Order placed! ☕ We’ll have it freshly prepared for you. (This was a demo — nothing was saved.)",
         questions: [
           {
             order: 0,
@@ -371,13 +371,13 @@ export default async function LandingPage() {
                 target="_blank"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-300 hover:text-amber-200 transition-colors"
               >
-                <span>Open Sunny Side Bakery testbed</span>
+                <span>Open Pistachio & Sage Cafe testbed</span>
                 <ExternalLink className="size-4" />
               </Link>
             </div>
           </div>
 
-          {/* Right Column: Pretend Website Window (Sunny Side Bakery) with embedded Chatbot */}
+          {/* Right Column: Pretend Website Window (Pistachio & Sage Cafe) with embedded Chatbot */}
           <div className="overflow-hidden rounded-2xl bg-umber-950 shadow-2xl border border-bronze-400/20 ring-1 ring-white/5">
             {/* Browser top chrome */}
             <div className="flex items-center gap-2 border-b border-umber-800 bg-umber-900 px-4 py-3">
@@ -385,16 +385,16 @@ export default async function LandingPage() {
               <span className="size-3 rounded-full bg-umber-700" />
               <span className="size-3 rounded-full bg-umber-700" />
               <span className="ml-3 flex-1 truncate rounded-md bg-umber-950 px-3 py-1 text-xs text-umber-400 font-mono">
-                sunnysidebakery.com
+                pistachiosagecafe.com
               </span>
             </div>
 
-            {/* Pretend Bakery Page Content with embedded chatbot on bottom-right */}
+            {/* Pretend Cafe Page Content with embedded chatbot on bottom-right */}
             <div className="relative bg-[#fff8ef] h-[580px] overflow-hidden">
-              {/* Bakery mock page layout */}
+              {/* Cafe mock page layout */}
               <div aria-hidden={true} className="hidden sm:block p-8">
                 <p className="font-serif text-2xl font-bold text-[#142010]">
-                  🥐 Sunny Side Bakery
+                  🌿 Pistachio & Sage Cafe
                 </p>
                 <div className="mt-6 h-4 w-3/5 rounded bg-[#e5ece1]" />
                 <div className="mt-2.5 h-4 w-2/5 rounded bg-[#e5ece1]" />

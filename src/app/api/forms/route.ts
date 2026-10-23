@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     const {
       title = "Untitled Form",
       description = "",
-      botName = "Formchat Assistant",
+      botName = "ChatVibe Assistant",
       botAvatar = "🥐",
       themeColor = "#a96325",
       welcomeMessage = "Hi there! 👋 Could you answer a few quick questions for us?",

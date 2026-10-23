@@ -39,7 +39,7 @@ export default async function PublicFormPage(props: { params: Promise<{ id: stri
             <MessageSquare className="size-3.5 fill-umber-950" />
           </div>
           <span className="font-display text-sm font-bold tracking-tight text-umber-50">
-            Formchat
+            ChatVibe
           </span>
         </Link>
         <span className="text-[11px] text-umber-400">Conversational Form</span>
@@ -75,7 +75,7 @@ export default async function PublicFormPage(props: { params: Promise<{ id: stri
         <p className="text-[11px] text-umber-400">
           Powered by{" "}
           <Link href="/" className="font-semibold text-amber-300 hover:text-amber-200 transition-colors">
-            Formchat
+            ChatVibe
           </Link>
         </p>
       </div>
