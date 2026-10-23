@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/auth";
 import { QuestionData } from "@/types";
 
 export async function GET(
@@ -45,7 +46,26 @@ export async function PUT(
   props: { params: Promise<{ id: string }> }
 ) {
   try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { id } = await props.params;
+
+    const existingForm = await prisma.form.findUnique({
+      where: { id },
+      select: { userId: true },
+    });
+
+    if (!existingForm) {
+      return NextResponse.json({ error: "Form not found" }, { status: 404 });
+    }
+
+    if (user.role !== "admin" && existingForm.userId !== user.id) {
+      return NextResponse.json({ error: "Forbidden: You do not own this form" }, { status: 403 });
+    }
+
     const body = await request.json();
 
     const {
@@ -158,6 +178,23 @@ export async function DELETE(
 ) {
   try {
     const { id } = await props.params;
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const existingForm = await prisma.form.findUnique({
+      where: { id },
+      select: { userId: true },
+    });
+
+    if (!existingForm) {
+      return NextResponse.json({ error: "Form not found" }, { status: 404 });
+    }
+
+    if (user.role !== "admin" && existingForm.userId !== user.id) {
+      return NextResponse.json({ error: "Forbidden: You do not own this form" }, { status: 403 });
+    }
 
     await prisma.form.delete({
       where: { id },

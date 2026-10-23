@@ -1,11 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { MessageSquare, Menu, X, ArrowRight, ExternalLink } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { MessageSquare, Menu, X, ArrowRight, ExternalLink, LogOut, Shield } from "lucide-react";
 
 export default function Navbar() {
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<{ id: string; email: string; role: string } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.user) setUser(data.user);
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/me", { method: "POST" });
+    setUser(null);
+    router.push("/");
+    router.refresh();
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-umber-800/60 bg-umber-950/85 backdrop-blur-md transition-all">
@@ -39,22 +58,41 @@ export default function Navbar() {
               target="_blank"
               className="hover:text-amber-100 transition-colors flex items-center gap-1.5 text-amber-200/90"
             >
-              <span>Bakery Test Site</span>
+              <span>Pistachio & Sage Cafe</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
             <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
               Dashboard
             </Link>
+            {user?.role === "admin" && (
+              <Link
+                href="/admin"
+                className="text-[#c4dfb9] hover:text-white font-semibold transition-colors flex items-center gap-1"
+              >
+                <Shield className="size-3.5" />
+                <span>Admin</span>
+              </Link>
+            )}
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-sm font-medium text-umber-300 hover:text-amber-100 transition-colors"
-            >
-              Log in
-            </Link>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-umber-300 hover:text-amber-100 transition-colors"
+              >
+                <LogOut className="size-4" />
+                <span>Log out</span>
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="text-sm font-medium text-umber-300 hover:text-amber-100 transition-colors"
+              >
+                Log in
+              </Link>
+            )}
             <Link
               href="/dashboard/forms/new"
               className="bg-bronze-metal rounded-full px-5 py-2 text-sm font-semibold text-umber-950 shadow-[0_4px_16px_-4px_rgba(129,158,113,0.5)] hover:brightness-110 active:scale-95 transition-all"

@@ -26,10 +26,18 @@ export async function POST(request: Request) {
       );
     }
 
+    if (user.isSuspended) {
+      return NextResponse.json(
+        { error: "Your account has been suspended by an administrator." },
+        { status: 403 }
+      );
+    }
+
     const safeUser = {
       id: user.id,
       name: user.name,
       email: user.email,
+      role: user.role,
     };
 
     const response = NextResponse.json({

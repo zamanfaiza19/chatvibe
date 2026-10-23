@@ -50,9 +50,9 @@ function LoginForm() {
     }
   };
 
-  const handleFastDemoLogin = async () => {
-    setEmail("demo@formchat.app");
-    setPassword("password123");
+  const handleFastLogin = async (loginEmail: string, loginPass: string, redirectPath: string) => {
+    setEmail(loginEmail);
+    setPassword(loginPass);
     setLoading(true);
     setError(null);
 
@@ -60,17 +60,18 @@ function LoginForm() {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: "demo@formchat.app", password: "password123" }),
+        body: JSON.stringify({ email: loginEmail, password: loginPass }),
       });
 
       if (!res.ok) {
-        throw new Error("Demo login failed");
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Login failed");
       }
 
-      router.push("/dashboard");
+      router.push(redirectPath);
       router.refresh();
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Failed to login with demo account");
+      setError(err instanceof Error ? err.message : "Failed to login");
     } finally {
       setLoading(false);
     }
@@ -204,16 +205,24 @@ function LoginForm() {
               </button>
             </form>
 
-            {/* Quick Demo Test Access */}
-            <div className="mt-6 pt-5 border-t border-umber-800/80 text-center">
-              <p className="text-[11px] text-umber-400 mb-2">Want to evaluate without typing?</p>
+            {/* Quick Demo & Admin Test Access */}
+            <div className="mt-6 pt-5 border-t border-umber-800/80 text-center space-y-2">
+              <p className="text-[11px] text-umber-400 mb-2">Instant 1-Click Access:</p>
               <button
                 type="button"
-                onClick={handleFastDemoLogin}
+                onClick={() => handleFastLogin("admin@chatvibe.app", "admin123", "/admin")}
+                disabled={loading}
+                className="w-full py-2 px-3 rounded-xl border border-[#819e71]/40 bg-[#819e71]/15 hover:bg-[#819e71]/25 text-[#c4dfb9] text-xs font-semibold transition-all flex items-center justify-center gap-2"
+              >
+                <span>🛡️ 1-Click Admin Login (admin@chatvibe.app)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleFastLogin("demo@formchat.app", "password123", "/dashboard")}
                 disabled={loading}
                 className="w-full py-2 px-3 rounded-xl border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-200 text-xs font-semibold transition-all flex items-center justify-center gap-2"
               >
-                <span>⚡ 1-Click Demo Login (demo@formchat.app)</span>
+                <span>👤 1-Click Regular User (demo@formchat.app)</span>
               </button>
             </div>
           </div>

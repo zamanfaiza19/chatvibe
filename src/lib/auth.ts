@@ -20,8 +20,12 @@ export async function getCurrentUser() {
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      select: { id: true, email: true, name: true, createdAt: true },
+      select: { id: true, email: true, name: true, role: true, isSuspended: true, createdAt: true },
     });
+
+    if (!user || user.isSuspended) {
+      return null;
+    }
 
     return user;
   } catch (error) {

@@ -23,6 +23,7 @@ import {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const [user, setUser] = useState<{ id: string; name: string | null; email: string; role: string } | null>(null);
   const [forms, setForms] = useState<FormData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,24 +34,36 @@ export default function DashboardPage() {
   const [newDescription, setNewDescription] = useState("");
   const [creating, setCreating] = useState(false);
 
-  const fetchForms = React.useCallback(async () => {
+  const fetchUserAndForms = React.useCallback(async () => {
     try {
       setLoading(true);
+      const userRes = await fetch("/api/auth/me");
+      if (!userRes.ok) {
+        router.push("/login");
+        return;
+      }
+      const userData = await userRes.json();
+      if (!userData.user) {
+        router.push("/login");
+        return;
+      }
+      setUser(userData.user);
+
       const res = await fetch("/api/forms");
       if (res.ok) {
         const data = await res.json();
         setForms(data);
       }
     } catch (err) {
-      console.error("Error fetching forms:", err);
+      console.error("Error fetching dashboard data:", err);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
-    fetchForms();
-  }, [fetchForms]);
+    fetchUserAndForms();
+  }, [fetchUserAndForms]);
 
   const handleTogglePublish = async (form: FormData) => {
     try {
@@ -138,15 +151,30 @@ export default function DashboardPage() {
         {/* Dashboard Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-umber-50 tracking-tight">
-              ChatVibe Dashboard
-            </h1>
+            <div className="flex items-center gap-3">
+              <h1 className="font-display text-2xl sm:text-3xl font-bold text-umber-50 tracking-tight">
+                ChatVibe Dashboard
+              </h1>
+              {user && (
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-umber-900 border border-umber-800 text-umber-300">
+                  {user.email}
+                </span>
+              )}
+            </div>
             <p className="text-sm text-umber-300 mt-1">
               Build forms, manage live chatbot embeds, and analyze visitor submissions in real-time.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
+            {user?.role === "admin" && (
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-umber-900/80 hover:bg-umber-800 border border-[#819e71]/50 text-[#c4dfb9] text-sm font-semibold transition-all active:scale-95 shadow-sm"
+              >
+                <span>🛡️ Admin Panel</span>
+              </Link>
+            )}
             <Link
               id="create-form-btn"
               href="/dashboard/forms/new"

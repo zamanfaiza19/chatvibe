@@ -1,12 +1,31 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/auth";
 import { QuestionData } from "@/types";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const scope = searchParams.get("scope");
+
+    // If admin requests all forms explicitly, allow it
+    const whereClause =
+      user.role === "admin" && scope === "all"
+        ? {}
+        : { userId: user.id };
+
     const forms = await prisma.form.findMany({
+      where: whereClause,
       orderBy: { createdAt: "desc" },
       include: {
+        user: {
+          select: { id: true, name: true, email: true },
+        },
         questions: {
           orderBy: { order: "asc" },
         },
@@ -33,13 +52,18 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
     const {
       title = "Untitled Form",
       description = "",
       botName = "ChatVibe Assistant",
       botAvatar = "🥐",
-      themeColor = "#a96325",
+      themeColor = "#819e71",
       welcomeMessage = "Hi there! 👋 Could you answer a few quick questions for us?",
       completionMessage = "Thank you! 🎉 We have received your answers.",
       published = true,
@@ -63,6 +87,7 @@ export async function POST(request: Request) {
 
     const newForm = await prisma.form.create({
       data: {
+        userId: user.id,
         title,
         description,
         botName,
