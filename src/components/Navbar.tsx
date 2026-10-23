@@ -48,18 +48,12 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-4">
             <Link
               href="/login"
-              className="text-sm font-medium text-umber-300 hover:text-amber-100 transition-colors px-2 py-1"
+              className="text-sm font-medium text-umber-300 hover:text-amber-100 transition-colors"
             >
               Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="text-sm font-semibold text-amber-200 hover:text-white border border-umber-800 hover:border-bronze-500 bg-umber-900/60 rounded-full px-4 py-2 transition-all"
-            >
-              Sign in
             </Link>
             <Link
               href="/dashboard/forms/new"
@@ -127,13 +121,6 @@ export default function Navbar() {
             className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
           >
             Log in
-          </Link>
-          <Link
-            href="/signup"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-amber-200 hover:bg-umber-900 rounded-lg"
-          >
-            Sign in
           </Link>
           <div className="pt-2">
             <Link
