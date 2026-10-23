@@ -10,6 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  forms     Form[]
+}
+
 model Form {
   id                String       @id @default(cuid())
   title             String
@@ -24,6 +35,9 @@ model Form {
   themeColor        String       @default("#4f46e5")
   welcomeMessage    String       @default("Hi there! 👋 Thanks for stopping by. Could you answer a few quick questions for us?")
   completionMessage String       @default("All done! 🎉 Thank you so much for your responses. Have a wonderful day!")
+
+  userId            String?
+  user              User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   questions         Question[]
   submissions       Submission[]

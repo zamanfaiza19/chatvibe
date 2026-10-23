@@ -1,19 +1,35 @@
 import { PrismaClient } from "@prisma/client";
+import crypto from "crypto";
 
 const prisma = new PrismaClient();
 
+function hashPassword(password: string): string {
+  return crypto.createHash("sha256").update(password).digest("hex");
+}
+
 async function main() {
-  console.log("Seeding Formchat initial forms and submissions...");
+  console.log("Seeding Formchat initial forms, users, and submissions...");
 
   // Delete existing records to avoid duplicates on re-seeding
   await prisma.answer.deleteMany();
   await prisma.submission.deleteMany();
   await prisma.question.deleteMany();
   await prisma.form.deleteMany();
+  await prisma.user.deleteMany();
+
+  // Create demo user
+  const demoUser = await prisma.user.create({
+    data: {
+      email: "demo@formchat.app",
+      name: "Demo Admin",
+      password: hashPassword("password123"),
+    },
+  });
 
   // Create sample published form 1: Sunny Side Bakery (Cake Order)
   const form1 = await prisma.form.create({
     data: {
+      userId: demoUser.id,
       title: "Sunny Side Bakery",
       description: "Cake ordering form for celebrations, weddings, and events.",
       published: true,
@@ -127,6 +143,7 @@ async function main() {
   // Create sample form 2: Website Lead Qualification
   await prisma.form.create({
     data: {
+      userId: demoUser.id,
       title: "Website Lead Qualification",
       description: "Embed on your landing page to qualify inbound customer inquiries.",
       published: true,
