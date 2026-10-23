@@ -44,36 +44,41 @@ export default function Navbar() {
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-umber-300">
-            <Link href="/#features" className="hover:text-amber-100 transition-colors">
-              Features
-            </Link>
-            <Link href="/#how-it-works" className="hover:text-amber-100 transition-colors">
-              How it works
-            </Link>
-            <Link href="/#demo" className="hover:text-amber-100 transition-colors">
-              Demo
-            </Link>
-            <Link
-              href="/test-embed.html"
-              target="_blank"
-              className="hover:text-amber-100 transition-colors flex items-center gap-1.5 text-amber-200/90"
-            >
-              <span>Pistachio & Sage Cafe</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </Link>
-            {user && (
-              <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
-                Dashboard
-              </Link>
-            )}
-            {user?.role === "admin" && (
-              <Link
-                href="/admin"
-                className="text-[#c4dfb9] hover:text-white font-semibold transition-colors flex items-center gap-1"
-              >
-                <Shield className="size-3.5" />
-                <span>Admin</span>
-              </Link>
+            {!user ? (
+              <>
+                <Link href="/#features" className="hover:text-amber-100 transition-colors">
+                  Features
+                </Link>
+                <Link href="/#how-it-works" className="hover:text-amber-100 transition-colors">
+                  How it works
+                </Link>
+                <Link href="/#demo" className="hover:text-amber-100 transition-colors">
+                  Demo
+                </Link>
+                <Link
+                  href="/test-embed.html"
+                  target="_blank"
+                  className="hover:text-amber-100 transition-colors flex items-center gap-1.5 text-amber-200/90"
+                >
+                  <span>Pistachio & Sage Cafe</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/dashboard" className="text-amber-100 font-semibold hover:text-white transition-colors">
+                  Dashboard
+                </Link>
+                {user.role === "admin" && (
+                  <Link
+                    href="/admin"
+                    className="text-[#c4dfb9] hover:text-white font-semibold transition-colors flex items-center gap-1"
+                  >
+                    <Shield className="size-3.5" />
+                    <span>Admin Panel</span>
+                  </Link>
+                )}
+              </>
             )}
           </nav>
 
@@ -118,53 +123,58 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-umber-800 bg-umber-950 px-4 pt-3 pb-6 space-y-3 animate-slide-up">
-          <Link
-            href="/#features"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
-          >
-            Features
-          </Link>
-          <Link
-            href="/#how-it-works"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
-          >
-            How it works
-          </Link>
-          <Link
-            href="/#demo"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
-          >
-            Live Demo
-          </Link>
-          <Link
-            href="/test-embed.html"
-            target="_blank"
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-between px-3 py-2 text-base font-semibold text-amber-200 hover:bg-umber-900 rounded-lg"
-          >
-            <span>Pistachio & Sage Cafe Test</span>
-            <ExternalLink className="w-4 h-4" />
-          </Link>
-          {user && (
-            <Link
-              href="/dashboard"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
-            >
-              Dashboard
-            </Link>
-          )}
-          {user?.role === "admin" && (
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-base font-semibold text-[#c4dfb9] hover:bg-umber-900 rounded-lg"
-            >
-              🛡️ Admin Panel
-            </Link>
+          {!user ? (
+            <>
+              <Link
+                href="/#features"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
+              >
+                Features
+              </Link>
+              <Link
+                href="/#how-it-works"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
+              >
+                How it works
+              </Link>
+              <Link
+                href="/#demo"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
+              >
+                Live Demo
+              </Link>
+              <Link
+                href="/test-embed.html"
+                target="_blank"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-between px-3 py-2 text-base font-semibold text-amber-200 hover:bg-umber-900 rounded-lg"
+              >
+                <span>Pistachio & Sage Cafe Test</span>
+                <ExternalLink className="w-4 h-4" />
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/dashboard"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-3 py-2 text-base font-semibold text-amber-100 hover:bg-umber-900 rounded-lg"
+              >
+                Dashboard
+              </Link>
+              {user.role === "admin" && (
+                <Link
+                  href="/admin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-semibold text-[#c4dfb9] hover:bg-umber-900 rounded-lg"
+                >
+                  🛡️ Admin Panel
+                </Link>
+              )}
+            </>
           )}
           {!user ? (
             <Link

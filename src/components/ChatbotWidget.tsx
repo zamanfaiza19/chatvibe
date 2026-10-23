@@ -40,6 +40,7 @@ export default function ChatbotWidget({
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const msgCounterRef = useRef<number>(1);
@@ -49,25 +50,28 @@ export default function ChatbotWidget({
   const currentQuestion: QuestionData | undefined = questions[currentQuestionIndex];
   const themeColor = form.themeColor || "#4f46e5";
 
-  // Auto-scroll chat to latest message
+  // Auto-scroll ONLY inside the chat container (never scrolls the parent page)
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  // Focus input when moving to a new question that requires text
+  // Focus input when moving to a new question that requires text, but NOT in preview mode (prevents stealing cursor while editing)
   useEffect(() => {
     if (
+      !isPreview &&
       currentQuestion &&
       (currentQuestion.type === "text" || currentQuestion.type === "email") &&
       !isTyping
     ) {
-      inputRef.current?.focus();
+      inputRef.current?.focus({ preventScroll: true });
     }
-  }, [currentQuestionIndex, isTyping, currentQuestion]);
+  }, [currentQuestionIndex, isTyping, currentQuestion, isPreview]);
 
   const handleAllQuestionsAnswered = async (finalAnswers?: Record<string, string>) => {
     setIsTyping(true);
@@ -346,6 +350,7 @@ export default function ChatbotWidget({
 
       {/* Messages Scroll Area with soft micro-dot pattern background */}
       <div
+        ref={messagesContainerRef}
         className="flex-1 overflow-y-auto p-5 space-y-4"
         style={{
           backgroundImage: "radial-gradient(#e5ece1 1px, transparent 1px)",

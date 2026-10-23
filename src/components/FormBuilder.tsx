@@ -109,7 +109,6 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
     const updated = [...questions];
     updated[index] = { ...updated[index], [field]: value };
     setQuestions(updated);
-    refreshPreview();
   };
 
   // Manage multiple choice options
@@ -628,7 +627,6 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                         value={form.welcomeMessage}
                         onChange={(e) => {
                           setForm({ ...form, welcomeMessage: e.target.value });
-                          refreshPreview();
                         }}
                         rows={2}
                         className="w-full px-3 py-2 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"
@@ -643,7 +641,6 @@ export default function FormBuilder({ initialForm }: FormBuilderProps) {
                         value={form.completionMessage}
                         onChange={(e) => {
                           setForm({ ...form, completionMessage: e.target.value });
-                          refreshPreview();
                         }}
                         rows={2}
                         className="w-full px-3 py-2 text-xs bg-umber-950/70 border border-umber-800 text-umber-100 rounded-xl focus:border-bronze-500 focus:outline-none focus:ring-1 focus:ring-bronze-500"

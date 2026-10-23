@@ -83,7 +83,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-umber-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-umber-500 gap-4">
-          <p>© {new Date().getFullYear()} ChatVibe. Forms that feel like a conversation.</p>
+          <p>© {new Date().getFullYear()} ChatVibe. Conversational forms that convert.</p>
           <div className="flex items-center gap-6">
             <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
               User Dashboard

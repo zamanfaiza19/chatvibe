@@ -111,12 +111,12 @@ export default async function LandingPage() {
 
           {/* Headline */}
           <h1 className="text-bronze-metal font-display text-[clamp(2.5rem,6.5vw,4.75rem)] leading-[1.02] font-bold tracking-[-0.035em] pb-2 max-w-4xl mx-auto">
-            Forms that feel like a conversation.
+            Turn boring surveys into engaging conversations.
           </h1>
 
           {/* Description */}
           <p className="mt-6 text-lg sm:text-xl text-umber-300 max-w-2xl mx-auto leading-relaxed">
-            ChatVibe asks your questions one at a time, like a chat. Build a form in minutes, add it to any website with a single line of code and read every answer in your dashboard.
+            ChatVibe replaces stiff web forms with intuitive conversational chatbots that people actually enjoy answering. Collect qualified leads, collect genuine feedback, and boost completion rates effortlessly.
           </p>
 
           {/* Action CTAs */}
