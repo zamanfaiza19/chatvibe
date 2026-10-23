@@ -254,26 +254,44 @@ export default function ChatbotWidget({
         standalone ? "min-h-screen sm:min-h-0 sm:max-h-[720px] sm:rounded-2xl border border-slate-200" : "rounded-none"
       }`}
     >
-      {/* Top Header */}
+      {/* Top Header with Pistachio/Sage luxury pattern overlay */}
       <div
-        className="px-4 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between text-white shrink-0 relative overflow-hidden"
-        style={{ backgroundColor: themeColor }}
+        className="px-4 py-3.5 sm:px-5 sm:py-4 flex items-center justify-between text-white shrink-0 relative overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, ${themeColor} 0%, #6d8e5f 50%, #4d673f 100%)`,
+        }}
       >
+        {/* Subtle geometric pattern overlay */}
+        <div
+          aria-hidden={true}
+          className="absolute inset-0 opacity-15 pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, #c4dfb9 1.5px, transparent 0)`,
+            backgroundSize: "16px 16px",
+          }}
+        />
+
+        {/* Pistachio soft ambient glow in header */}
+        <div
+          aria-hidden={true}
+          className="absolute -top-8 -right-8 w-36 h-36 rounded-full bg-[#c4dfb9]/25 blur-2xl pointer-events-none"
+        />
+
         <div className="flex items-center gap-2.5 sm:gap-3 z-10 min-w-0 flex-1 mr-2">
-          <div className="size-9 sm:size-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-lg sm:text-xl shadow-inner border border-white/30 shrink-0">
+          <div className="size-9 sm:size-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-lg sm:text-xl shadow-inner border border-[#c4dfb9]/40 shrink-0">
             {form.botAvatar || "🥐"}
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5 min-w-0">
-              <h3 className="font-bold text-sm sm:text-base tracking-tight leading-tight truncate">
+              <h3 className="font-bold text-sm sm:text-base tracking-tight leading-tight truncate text-white">
                 {form.botName || "ChatVibe Assistant"}
               </h3>
               <span className="flex h-2 w-2 relative shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c4dfb9] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c4dfb9]"></span>
               </span>
             </div>
-            <p className="text-[11px] sm:text-xs text-white/80 truncate">{form.title}</p>
+            <p className="text-[11px] sm:text-xs text-[#e5ece1] truncate">{form.title}</p>
           </div>
         </div>
 
@@ -300,9 +318,6 @@ export default function ChatbotWidget({
             </button>
           )}
         </div>
-
-        {/* Subtle decorative glow */}
-        <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none" />
       </div>
 
       {/* Progress Bar */}
@@ -315,12 +330,12 @@ export default function ChatbotWidget({
 
       {/* Question Counter Indicator */}
       {currentQuestionIndex >= 0 && !isCompleted && (
-        <div className="bg-slate-50 border-b border-slate-100 px-5 py-1.5 flex items-center justify-between text-xs text-slate-500 font-medium">
-          <span>
+        <div className="bg-[#f4f7f2] border-b border-[#e5ece1] px-5 py-2 flex items-center justify-between text-xs text-[#4d673f] font-medium">
+          <span className="font-semibold">
             Question {currentQuestionIndex + 1} of {questions.length}
           </span>
           {currentQuestion?.required ? (
-            <span className="text-amber-600 font-semibold text-[11px] bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+            <span className="text-[#384d2d] font-bold text-[11px] bg-[#d6eccb] px-2.5 py-0.5 rounded-full border border-[#abc5a1]">
               Required *
             </span>
           ) : (
@@ -329,15 +344,21 @@ export default function ChatbotWidget({
         </div>
       )}
 
-      {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto p-5 space-y-4">
+      {/* Messages Scroll Area with soft micro-dot pattern background */}
+      <div
+        className="flex-1 overflow-y-auto p-5 space-y-4"
+        style={{
+          backgroundImage: "radial-gradient(#e5ece1 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      >
         {messages.map((msg) => (
           <div
             key={msg.id}
             className={`flex items-end gap-2.5 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
           >
             {msg.sender === "bot" && (
-              <div className="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-sm shrink-0 mb-0.5 shadow-sm">
+              <div className="w-7 h-7 rounded-full bg-[#e5ece1] border border-[#cddcc6] flex items-center justify-center text-sm shrink-0 mb-0.5 shadow-xs">
                 {form.botAvatar || "🤖"}
               </div>
             )}
@@ -345,8 +366,8 @@ export default function ChatbotWidget({
             <div
               className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
                 msg.sender === "user"
-                  ? "text-white rounded-br-xs shadow-md"
-                  : "bg-slate-100 text-black rounded-bl-xs border border-slate-200/70"
+                  ? "text-white rounded-br-xs shadow-md font-medium"
+                  : "bg-white text-black rounded-bl-xs border border-[#cddcc6] shadow-xs"
               }`}
               style={{
                 backgroundColor: msg.sender === "user" ? themeColor : undefined,
@@ -360,13 +381,13 @@ export default function ChatbotWidget({
         {/* Typing indicator bubble */}
         {isTyping && (
           <div className="flex items-end gap-2.5 justify-start animate-fade-in">
-            <div className="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-sm shrink-0 mb-0.5">
+            <div className="w-7 h-7 rounded-full bg-[#e5ece1] border border-[#cddcc6] flex items-center justify-center text-sm shrink-0 mb-0.5">
               {form.botAvatar || "🤖"}
             </div>
-            <div className="bg-slate-100 border border-slate-200/70 rounded-2xl rounded-bl-xs px-4 py-3 text-slate-400 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "0ms" }}></span>
-              <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "150ms" }}></span>
-              <span className="w-2 h-2 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "300ms" }}></span>
+            <div className="bg-white border border-[#cddcc6] rounded-2xl rounded-bl-xs px-4 py-3 text-slate-400 flex items-center gap-1.5 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#819e71] animate-bounce" style={{ animationDelay: "0ms" }}></span>
+              <span className="w-2 h-2 rounded-full bg-[#819e71] animate-bounce" style={{ animationDelay: "150ms" }}></span>
+              <span className="w-2 h-2 rounded-full bg-[#819e71] animate-bounce" style={{ animationDelay: "300ms" }}></span>
             </div>
           </div>
         )}
@@ -408,10 +429,10 @@ export default function ChatbotWidget({
                     <button
                       key={i}
                       onClick={() => handleUserAnswer(opt)}
-                      className="w-full text-left px-4 py-2.5 rounded-xl border border-slate-200 hover:border-amber-700/60 hover:bg-amber-50/50 text-black text-sm font-medium transition-all flex items-center justify-between group active:scale-[0.99]"
+                      className="w-full text-left px-4 py-2.5 rounded-xl border border-[#cddcc6] hover:border-[#819e71] hover:bg-[#e5ece1]/60 text-black text-sm font-medium transition-all flex items-center justify-between group active:scale-[0.99]"
                     >
                       <span>{opt}</span>
-                      <span className="text-xs text-slate-400 group-hover:text-amber-800 font-mono">
+                      <span className="text-xs text-slate-400 group-hover:text-[#4d673f] font-mono">
                         #{i + 1}
                       </span>
                     </button>
