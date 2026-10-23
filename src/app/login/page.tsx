@@ -210,11 +210,11 @@ function LoginForm() {
               <p className="text-[11px] text-umber-400 mb-2">Instant 1-Click Access:</p>
               <button
                 type="button"
-                onClick={() => handleFastLogin("admin@chatvibe.app", "admin123", "/admin")}
+                onClick={() => handleFastLogin("faizazaman1931@gmail.com", "12345678", "/admin")}
                 disabled={loading}
                 className="w-full py-2 px-3 rounded-xl border border-[#819e71]/40 bg-[#819e71]/15 hover:bg-[#819e71]/25 text-[#c4dfb9] text-xs font-semibold transition-all flex items-center justify-center gap-2"
               >
-                <span>🛡️ 1-Click Admin Login (admin@chatvibe.app)</span>
+                <span>🛡️ 1-Click Admin Login (faizazaman1931@gmail.com)</span>
               </button>
               <button
                 type="button"

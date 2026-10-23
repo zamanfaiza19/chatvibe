@@ -61,9 +61,11 @@ export default function Navbar() {
               <span>Pistachio & Sage Cafe</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
-            <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
-              Dashboard
-            </Link>
+            {user && (
+              <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
+                Dashboard
+              </Link>
+            )}
             {user?.role === "admin" && (
               <Link
                 href="/admin"
@@ -146,20 +148,43 @@ export default function Navbar() {
             <span>Pistachio & Sage Cafe Test</span>
             <ExternalLink className="w-4 h-4" />
           </Link>
-          <Link
-            href="/dashboard"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
-          >
-            Dashboard
-          </Link>
-          <Link
-            href="/login"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
-          >
-            Log in
-          </Link>
+          {user && (
+            <Link
+              href="/dashboard"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
+            >
+              Dashboard
+            </Link>
+          )}
+          {user?.role === "admin" && (
+            <Link
+              href="/admin"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 text-base font-semibold text-[#c4dfb9] hover:bg-umber-900 rounded-lg"
+            >
+              🛡️ Admin Panel
+            </Link>
+          )}
+          {!user ? (
+            <Link
+              href="/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
+            >
+              Log in
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                handleLogout();
+              }}
+              className="block w-full text-left px-3 py-2 text-base font-semibold text-umber-200 hover:bg-umber-900 rounded-lg"
+            >
+              Log out
+            </button>
+          )}
           <div className="pt-2">
             <Link
               href="/dashboard/forms/new"
