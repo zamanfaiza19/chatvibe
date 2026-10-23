@@ -13,7 +13,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Formchat — Interactive Form Builder with Chatbot Widget",
+  title: "ChatVibe — Interactive Form Builder with Chatbot Widget",
   description:
     "Build conversational forms that feel like a chat, embed them on any website with a single script tag, and collect answers seamlessly in your dashboard.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "customer feedback",
     "lead qualification",
   ],
-  authors: [{ name: "Formchat Team" }],
+  authors: [{ name: "ChatVibe Team" }],
 };
 
 export default function RootLayout({

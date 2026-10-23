@@ -18,7 +18,7 @@ export default function Navbar() {
             </div>
             <div className="flex items-center gap-2">
               <span className="font-display font-bold text-xl tracking-tight text-umber-50">
-                Formchat
+                ChatVibe
               </span>
             </div>
           </Link>

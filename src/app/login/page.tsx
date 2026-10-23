@@ -90,7 +90,7 @@ function LoginForm() {
                 <MessageSquare className="size-6 fill-umber-950" />
               </div>
               <h1 className="font-display text-2xl font-bold text-umber-50">
-                {mode === "login" ? "Sign in to Formchat" : "Create your Formchat account"}
+                {mode === "login" ? "Sign in to ChatVibe" : "Create your ChatVibe account"}
               </h1>
               <p className="text-xs text-umber-300 mt-1">
                 {mode === "login"

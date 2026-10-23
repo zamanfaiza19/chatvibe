@@ -266,7 +266,7 @@ export default function ChatbotWidget({
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5 min-w-0">
               <h3 className="font-bold text-sm sm:text-base tracking-tight leading-tight truncate">
-                {form.botName || "Formchat Assistant"}
+                {form.botName || "ChatVibe Assistant"}
               </h3>
               <span className="flex h-2 w-2 relative shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -483,7 +483,7 @@ export default function ChatbotWidget({
           </div>
         ) : (
           <div className="py-2 text-center text-xs text-slate-400">
-            {isSubmitting ? "Saving your response..." : "Powered by Formchat"}
+            {isSubmitting ? "Saving your response..." : "Powered by ChatVibe"}
           </div>
         )}
       </div>

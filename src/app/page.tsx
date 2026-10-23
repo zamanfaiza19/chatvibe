@@ -116,7 +116,7 @@ export default async function LandingPage() {
 
           {/* Description */}
           <p className="mt-6 text-lg sm:text-xl text-umber-300 max-w-2xl mx-auto leading-relaxed">
-            Formchat asks your questions one at a time, like a chat. Build a form in minutes, add it to any website with a single line of code and read every answer in your dashboard.
+            ChatVibe asks your questions one at a time, like a chat. Build a form in minutes, add it to any website with a single line of code and read every answer in your dashboard.
           </p>
 
           {/* Action CTAs */}
@@ -140,7 +140,7 @@ export default async function LandingPage() {
           <div className="mt-16 max-w-lg mx-auto bg-umber-900/70 border border-umber-800/90 rounded-3xl p-6 shadow-2xl backdrop-blur-md text-left space-y-3.5 ring-1 ring-white/5">
             <div className="flex items-center gap-2 border-b border-umber-800 pb-3 text-xs text-umber-400">
               <span className="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="font-semibold text-umber-200">Formchat Live Preview</span>
+              <span className="font-semibold text-umber-200">ChatVibe Live Preview</span>
             </div>
 
             {/* Bubble 1: Bot */}

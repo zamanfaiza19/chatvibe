@@ -12,7 +12,7 @@ export default function Footer() {
               <div className="size-7 rounded-lg bg-bronze-metal flex items-center justify-center text-umber-950 shadow-md">
                 <MessageSquare className="w-3.5 h-3.5 fill-umber-950" />
               </div>
-              <span className="font-display font-bold text-lg tracking-tight">Formchat</span>
+              <span className="font-display font-bold text-lg tracking-tight">ChatVibe</span>
             </Link>
             <p className="text-sm text-umber-300 leading-relaxed">
               Build forms, embed them on any website as a friendly chat widget and manage every response from one dashboard.
@@ -73,7 +73,7 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-umber-100 mb-4">Open Source</h4>
             <p className="text-xs text-umber-400 mb-3 leading-relaxed">
-              Formchat is an open-source project built with Next.js, SQLite/Supabase, and Tailwind CSS.
+              ChatVibe is an open-source project built with Next.js, SQLite/Supabase, and Tailwind CSS.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-umber-900/80 border border-umber-800 text-xs text-amber-300 font-medium">
               <span className="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -83,7 +83,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-umber-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-umber-500 gap-4">
-          <p>© {new Date().getFullYear()} Formchat. Forms that feel like a conversation.</p>
+          <p>© {new Date().getFullYear()} ChatVibe. Forms that feel like a conversation.</p>
           <div className="flex items-center gap-6">
             <Link href="/dashboard" className="hover:text-amber-100 transition-colors">
               User Dashboard

@@ -139,7 +139,7 @@ export default function DashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
             <h1 className="font-display text-2xl sm:text-3xl font-bold text-umber-50 tracking-tight">
-              Formchat Dashboard
+              ChatVibe Dashboard
             </h1>
             <p className="text-sm text-umber-300 mt-1">
               Build forms, manage live chatbot embeds, and analyze visitor submissions in real-time.
