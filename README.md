@@ -1,7 +1,7 @@
 # Formchat — Interactive Form Builder with Chatbot Widget
 
 > **Full-Stack Conversational Form Platform & Embeddable Chatbot Widget**  
-> Built with Next.js (App Router), React 19, TypeScript, Tailwind CSS v3, Prisma ORM, and SQLite.
+> Built with Next.js (App Router), React 19, TypeScript, Tailwind CSS v3, Prisma ORM, and PostgreSQL.
 
 ![Formchat Banner](https://img.shields.io/badge/Formchat-Interactive_Forms_%26_Chatbot-a96325?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
@@ -9,7 +9,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v3-38bdf8?style=flat-square&logo=tailwindcss)
 ![Prisma](https://img.shields.io/badge/Prisma-6-2D3748?style=flat-square&logo=prisma)
-![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=flat-square&logo=sqlite)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791?style=flat-square&logo=postgresql)
 
 ---
 
@@ -76,7 +76,7 @@
 | **Frontend** | React 19 |
 | **Styling** | Tailwind CSS v3 (Custom Bronze & Umber Design System) |
 | **Icons** | Lucide React |
-| **Database** | SQLite via Prisma ORM 6 |
+| **Database** | PostgreSQL via Prisma ORM 6 |
 | **Effects** | Canvas Confetti |
 
 ---
@@ -86,6 +86,7 @@
 ### 1. Prerequisites
 - **Node.js**: `v18+` (v20+ recommended)
 - **npm**: `v9+`
+- **PostgreSQL**: `v14+` (local or hosted like Supabase/Neon)
 
 ### 2. Installation
 Navigate to the project directory:
@@ -95,7 +96,7 @@ npm install
 ```
 
 ### 3. Initialize Database & Seed Sample Data
-Push the Prisma schema to generate the SQLite database and seed sample forms (including Sunny Side Bakery):
+Ensure your `.env` contains your `DATABASE_URL` (e.g. `postgresql://localhost:5432/formchat`), then push the schema to PostgreSQL and seed initial forms:
 ```bash
 npm run db:push
 npm run db:seed
